@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CKB OpenRPC Explorer</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body data-spec="./ckb_rpc_openrpc/json/ckb_rpc.json">
+    <div class="bg-orb orb-a"></div>
+    <div class="bg-orb orb-b"></div>
+
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">CKB</div>
+        <div>
+          <div class="brand-title">OpenRPC Explorer</div>
+          <div class="brand-sub">Interactive docs for CKB JSON-RPC</div>
+        </div>
+      </div>
+      <div class="topbar-actions">
+        <label class="field">
+          <span>Endpoint</span>
+          <div class="endpoint-row">
+            <select id="endpoint-preset" class="preset-select" title="Choose preset">
+              <option value="https://mainnet.ckb.dev" selected>Mainnet</option>
+              <option value="https://testnet.ckb.dev">Testnet</option>
+              <option value="http://localhost:8114">Devnet</option>
+              <option value="https://localhost:8114">Custom</option>
+            </select>
+            <input
+              id="endpoint"
+              type="url"
+              placeholder="Custom endpoint URL"
+            />
+          </div>
+        </label>
+        <label class="field field-search">
+          <span>Search</span>
+          <input id="search" type="search" placeholder="Search methods, params, tags" />
+        </label>
+      </div>
+    </header>
+
+    <main class="app">
+      <section class="panel nav-panel">
+        <div class="panel-header">
+          <h2>Modules</h2>
+          <button id="clear-tag" class="ghost">All</button>
+        </div>
+        <div id="tags" class="tags"></div>
+      </section>
+
+      <section class="panel detail-panel">
+        <div id="method-detail" class="method-detail">
+          <div class="empty-state">
+            <h2>Select a method</h2>
+            <p>Pick a module and method to explore parameters, schema, and run interactive calls.</p>
+          </div>
+        </div>
+      </section>
+
+      <div id="panel-resizer" class="panel-resizer" title="Drag to resize"></div>
+
+      <section class="panel try-panel">
+        <div class="panel-header">
+          <h2>Try It</h2>
+          <div class="pill">Live</div>
+        </div>
+        <div id="tryout-panel" class="tryout-shell">
+          <div class="empty-state">
+            <h2>Ready to call</h2>
+            <p>Select a method to build and send JSON-RPC requests.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <template id="schema-node-template">
+      <details class="schema-node">
+        <summary>
+          <span class="schema-key"></span>
+          <span class="schema-type"></span>
+          <span class="schema-flags"></span>
+        </summary>
+        <div class="schema-body"></div>
+      </details>
+    </template>
+
+    <div id="schema-modal" class="schema-modal" hidden>
+      <div class="schema-modal-backdrop" data-close-schema></div>
+      <div class="schema-modal-panel">
+        <div class="schema-modal-header">
+          <h3 id="schema-modal-title">Schema</h3>
+          <button id="schema-modal-close" class="ghost">Close</button>
+        </div>
+        <div id="schema-modal-body" class="schema-modal-body"></div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/markdown-it@14.1.0/dist/markdown-it.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="app.js"></script>
+  </body>
+</html>
