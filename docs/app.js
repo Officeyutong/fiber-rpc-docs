@@ -635,6 +635,20 @@ function buildTrySection(method) {
   actions.append(buildBtn, sendBtn);
 
   const response = el("pre", "response", "Response will appear here.");
+
+  function setResponseText(text) {
+    response.textContent = text;
+  }
+
+  function setResponseJson(json) {
+    const pretty = JSON.stringify(json, null, 2);
+    if (window.hljs && window.hljs.getLanguage("json")) {
+      const highlighted = window.hljs.highlight(pretty, { language: "json" }).value;
+      response.innerHTML = `<code class="hljs language-json">${highlighted}</code>`;
+      return;
+    }
+    response.textContent = pretty;
+  }
   const curlRow = el("div", "curl-row");
   const curlLabel = el("div", "notice", "curl");
   const curlPre = el("pre", "curl-pre");
@@ -759,9 +773,9 @@ function buildTrySection(method) {
     if (!curl.trim()) return;
     try {
       await navigator.clipboard.writeText(curl);
-      response.textContent = "Copied curl command to clipboard.";
+      setResponseText("Copied curl command to clipboard.");
     } catch (_) {
-      response.textContent = curl;
+      setResponseText(curl);
     }
   });
 
@@ -770,7 +784,7 @@ function buildTrySection(method) {
     try {
       payload = buildPayload();
     } catch (err) {
-      response.textContent = err.message;
+      setResponseText(err.message);
       return;
     }
 
@@ -779,11 +793,11 @@ function buildTrySection(method) {
     try {
       headers = JSON.parse(headersInput.value || "{}");
     } catch (err) {
-      response.textContent = `Header JSON error: ${err.message}`;
+      setResponseText(`Header JSON error: ${err.message}`);
       return;
     }
 
-    response.textContent = "Sending request...";
+    setResponseText("Sending request...");
 
     try {
       const res = await fetch(endpoint, {
@@ -794,12 +808,12 @@ function buildTrySection(method) {
       const text = await res.text();
       try {
         const json = JSON.parse(text);
-        response.textContent = JSON.stringify(json, null, 2);
+        setResponseJson(json);
       } catch (_) {
-        response.textContent = text;
+        setResponseText(text);
       }
     } catch (err) {
-      response.textContent = `Request failed: ${err.message}`;
+      setResponseText(`Request failed: ${err.message}`);
     }
 
     state.requestId += 1;
