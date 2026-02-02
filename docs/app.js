@@ -21,6 +21,10 @@ const SUBSCRIPTION_TOPICS = [
   "proposed_transaction",
   "rejected_transaction",
 ];
+const SUBSCRIPTION_WS_PRESETS = [
+  { label: "Testnet", value: "wss://testnet-ws.ckbapp.dev" },
+  { label: "Mainnet", value: "wss://mainnet-ws.ckbapp.dev" },
+];
 
 const state = {
   spec: null,
@@ -777,11 +781,24 @@ function buildSubscriptionTrySection(topic) {
 
   const wsRow = el("div", "row");
   wsRow.append(el("label", "notice", "WebSocket Endpoint"));
+  const wsEndpointRow = el("div", "ws-endpoint-row");
+  const wsPresetSelect = el("select", "ws-preset-select");
+  const customOption = el("option", "", "Custom");
+  customOption.value = "";
+  wsPresetSelect.append(customOption);
+  SUBSCRIPTION_WS_PRESETS.forEach((preset) => {
+    const option = el("option", "", preset.label);
+    option.value = preset.value;
+    wsPresetSelect.append(option);
+  });
   const wsEndpointInput = el("input");
   wsEndpointInput.type = "url";
   wsEndpointInput.placeholder = "wss://testnet-ws.ckbapp.dev";
-  wsEndpointInput.value = loadSetting("rpcWsEndpoint") || "wss://testnet-ws.ckbapp.dev";
-  wsRow.append(wsEndpointInput);
+  const savedWs = loadSetting("rpcWsEndpoint") || SUBSCRIPTION_WS_PRESETS[0].value;
+  wsEndpointInput.value = savedWs;
+  wsPresetSelect.value = SUBSCRIPTION_WS_PRESETS.some((p) => p.value === savedWs) ? savedWs : "";
+  wsEndpointRow.append(wsPresetSelect, wsEndpointInput);
+  wsRow.append(wsEndpointRow);
 
   const wsControlRow = el("div", "row");
   const wsStatus = el("div", "notice", "Disconnected");
@@ -1065,6 +1082,17 @@ function buildSubscriptionTrySection(topic) {
     sendWs("unsubscribe", [subId]);
   });
 
+  wsPresetSelect.addEventListener("change", () => {
+    if (!wsPresetSelect.value) return;
+    wsEndpointInput.value = wsPresetSelect.value;
+    saveSetting("rpcWsEndpoint", wsEndpointInput.value);
+  });
+
+  wsEndpointInput.addEventListener("input", () => {
+    const value = wsEndpointInput.value.trim();
+    wsPresetSelect.value = SUBSCRIPTION_WS_PRESETS.some((p) => p.value === value) ? value : "";
+  });
+
   updateSubscriptionButtons();
 
   function setPretty(enabled) {
@@ -1241,7 +1269,7 @@ function init() {
       const msg = el(
         "p",
         "",
-        `${err.message}. If you opened this via file://, run a local server (e.g. "python -m http.server" in docs) and visit http://localhost:8000/.`
+        `${err.message}. If you opened this via file://, run a local server (e.g. "python -m http.server" in docs) and visit http://localhost:8000/ckb_rpc_webui/.`
       );
       error.append(msg);
       detailContainer.append(error);
