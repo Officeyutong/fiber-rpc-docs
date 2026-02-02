@@ -6,6 +6,7 @@ const panelResizer = document.getElementById("panel-resizer");
 const detailContainer = document.getElementById("method-detail");
 const clearTagBtn = document.getElementById("clear-tag");
 const endpointPreset = document.getElementById("endpoint-preset");
+const endpointLabel = document.getElementById("endpoint-label");
 const schemaModal = document.getElementById("schema-modal");
 const schemaModalTitle = document.getElementById("schema-modal-title");
 const schemaModalBody = document.getElementById("schema-modal-body");
@@ -21,7 +22,12 @@ const SUBSCRIPTION_TOPICS = [
   "proposed_transaction",
   "rejected_transaction",
 ];
-const SUBSCRIPTION_WS_PRESETS = [
+const HTTP_PRESETS = [
+  { label: "Mainnet", value: "https://mainnet.ckb.dev" },
+  { label: "Testnet", value: "https://testnet.ckb.dev" },
+  { label: "Devnet", value: "http://localhost:8114" },
+];
+const WS_PRESETS = [
   { label: "Testnet", value: "wss://testnet-ws.ckbapp.dev" },
   { label: "Mainnet", value: "wss://mainnet-ws.ckbapp.dev" },
 ];
@@ -39,6 +45,7 @@ const state = {
   schemaNames: [],
   schemaRegex: null,
   subscriptionMethod: null,
+  endpointMode: "http",
 };
 
 function saveSetting(key, value) {
@@ -53,6 +60,49 @@ function loadSetting(key) {
   } catch (_) {
     return null;
   }
+}
+
+function buildPresetOptions(mode) {
+  const presets = mode === "ws" ? WS_PRESETS : HTTP_PRESETS;
+  endpointPreset.innerHTML = "";
+  presets.forEach((preset) => {
+    const option = el("option", "", preset.label);
+    option.value = preset.value;
+    endpointPreset.append(option);
+  });
+  const custom = el("option", "", "Custom");
+  custom.value = "";
+  endpointPreset.append(custom);
+  return presets;
+}
+
+function applyEndpointMode(mode) {
+  state.endpointMode = mode;
+  const presets = buildPresetOptions(mode);
+  const label = mode === "ws" ? "WebSocket Endpoint" : "HTTP Endpoint";
+  if (endpointLabel) endpointLabel.textContent = label;
+  endpointInput.placeholder = mode === "ws" ? "wss://..." : "https://...";
+  const saved = mode === "ws"
+    ? loadSetting("rpcWsEndpoint")
+    : loadSetting("rpcEndpoint");
+  const fallback = presets[0]?.value || "";
+  const value = saved || fallback;
+  endpointInput.value = value;
+  endpointPreset.value = presets.some((p) => p.value === value) ? value : "";
+}
+
+function currentPresets() {
+  return state.endpointMode === "ws" ? WS_PRESETS : HTTP_PRESETS;
+}
+
+function saveEndpointValue(value) {
+  const key = state.endpointMode === "ws" ? "rpcWsEndpoint" : "rpcEndpoint";
+  saveSetting(key, value);
+}
+
+function syncPresetSelection(value) {
+  const presets = currentPresets();
+  endpointPreset.value = presets.some((p) => p.value === value) ? value : "";
 }
 
 function el(tag, className, text) {
@@ -359,6 +409,7 @@ function subscriptionTopicMatches(topic) {
 function selectMethod(method) {
   state.selectedMethod = method;
   state.selectedSubscriptionTopic = null;
+  applyEndpointMode("http");
   renderTags();
   renderDetail(method);
   renderTryPanel();
@@ -370,6 +421,7 @@ function selectSubscriptionTopic(topic) {
   state.selectedMethod = null;
   state.selectedSubscriptionTopic = topic;
   state.selectedTag = "Subscription";
+  applyEndpointMode("ws");
   renderTags();
   renderDetail(state.subscriptionMethod || { name: "subscribe", tags: [{ name: "Subscription" }] }, topic);
   renderTryPanel();
@@ -779,27 +831,6 @@ function buildSubscriptionTrySection(topic) {
 
   const wrap = el("div", "tryout");
 
-  const wsRow = el("div", "row");
-  wsRow.append(el("label", "notice", "WebSocket Endpoint"));
-  const wsEndpointRow = el("div", "ws-endpoint-row");
-  const wsPresetSelect = el("select", "ws-preset-select");
-  const customOption = el("option", "", "Custom");
-  customOption.value = "";
-  wsPresetSelect.append(customOption);
-  SUBSCRIPTION_WS_PRESETS.forEach((preset) => {
-    const option = el("option", "", preset.label);
-    option.value = preset.value;
-    wsPresetSelect.append(option);
-  });
-  const wsEndpointInput = el("input");
-  wsEndpointInput.type = "url";
-  wsEndpointInput.placeholder = "wss://testnet-ws.ckbapp.dev";
-  const savedWs = loadSetting("rpcWsEndpoint") || SUBSCRIPTION_WS_PRESETS[0].value;
-  wsEndpointInput.value = savedWs;
-  wsPresetSelect.value = SUBSCRIPTION_WS_PRESETS.some((p) => p.value === savedWs) ? savedWs : "";
-  wsEndpointRow.append(wsPresetSelect, wsEndpointInput);
-  wsRow.append(wsEndpointRow);
-
   const wsControlRow = el("div", "row");
   const wsStatus = el("div", "notice", "Disconnected");
   wsControlRow.append(wsStatus);
@@ -962,7 +993,7 @@ function buildSubscriptionTrySection(topic) {
   }
 
   function connectWs() {
-    const url = wsEndpointInput.value.trim();
+    const url = endpointInput.value.trim();
     if (!url) {
       statusLine.textContent = "WebSocket endpoint is required.";
       return Promise.reject(new Error("missing endpoint"));
@@ -1082,17 +1113,6 @@ function buildSubscriptionTrySection(topic) {
     sendWs("unsubscribe", [subId]);
   });
 
-  wsPresetSelect.addEventListener("change", () => {
-    if (!wsPresetSelect.value) return;
-    wsEndpointInput.value = wsPresetSelect.value;
-    saveSetting("rpcWsEndpoint", wsEndpointInput.value);
-  });
-
-  wsEndpointInput.addEventListener("input", () => {
-    const value = wsEndpointInput.value.trim();
-    wsPresetSelect.value = SUBSCRIPTION_WS_PRESETS.some((p) => p.value === value) ? value : "";
-  });
-
   updateSubscriptionButtons();
 
   function setPretty(enabled) {
@@ -1106,7 +1126,6 @@ function buildSubscriptionTrySection(topic) {
   prettyBtn.addEventListener("click", () => setPretty(true));
 
   wrap.append(
-    wsRow,
     wsControlRow,
     topicRow,
     idRow,
@@ -1137,28 +1156,30 @@ function buildDefaultParams(params) {
 }
 
 function init() {
-  const savedEndpoint = loadSetting("rpcEndpoint");
-  const presetOptions = endpointPreset ? Array.from(endpointPreset.options).map((o) => o.value) : [];
-  const initialEndpoint = savedEndpoint || "https://mainnet.ckb.dev";
-  endpointInput.value = initialEndpoint;
+  applyEndpointMode("http");
 
-  if (endpointPreset) {
-    endpointPreset.value = presetOptions.includes(initialEndpoint)
-      ? initialEndpoint
-      : "https://mainnet.ckb.dev";
-  }
+  endpointInput.addEventListener("input", () => {
+    const value = endpointInput.value.trim();
+    if (!value) {
+      endpointPreset.value = "";
+      return;
+    }
+    syncPresetSelection(value);
+  });
 
   endpointInput.addEventListener("change", () => {
     const value = endpointInput.value.trim();
     if (!value) return;
-    saveSetting("rpcEndpoint", value);
+    saveEndpointValue(value);
+    syncPresetSelection(value);
   });
 
   endpointPreset?.addEventListener("change", () => {
     const value = endpointPreset.value;
     if (!value) return;
     endpointInput.value = value;
-    saveSetting("rpcEndpoint", value);
+    saveEndpointValue(value);
+    syncPresetSelection(value);
   });
 
   const savedDetail = loadSetting("detailWidth");

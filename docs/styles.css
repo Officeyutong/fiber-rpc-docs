@@ -480,21 +480,6 @@ body {
   background: rgba(11, 15, 20, 0.6);
 }
 
-.ws-endpoint-row {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
-
-.ws-endpoint-row .ws-preset-select {
-  width: 140px;
-  flex: 0 0 auto;
-}
-
-.ws-endpoint-row input {
-  flex: 1 1 auto;
-}
-
 .tryout textarea {
   min-height: 120px;
   resize: vertical;
