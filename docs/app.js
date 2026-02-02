@@ -28,8 +28,8 @@ const HTTP_PRESETS = [
   { label: "Devnet", value: "http://localhost:8114" },
 ];
 const WS_PRESETS = [
-  { label: "Testnet", value: "wss://testnet-ws.ckbapp.dev" },
   { label: "Mainnet", value: "wss://mainnet-ws.ckbapp.dev" },
+  { label: "Testnet", value: "wss://testnet-ws.ckbapp.dev" },
 ];
 
 const state = {
