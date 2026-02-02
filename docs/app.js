@@ -31,6 +31,7 @@ const WS_PRESETS = [
   { label: "Mainnet", value: "wss://mainnet-ws.ckbapp.dev" },
   { label: "Testnet", value: "wss://testnet-ws.ckbapp.dev" },
 ];
+const DEFAULT_METHOD = "get_block_by_number";
 
 const state = {
   spec: null,
@@ -1263,6 +1264,9 @@ function init() {
       state.subscriptionMethod = state.methods.find((m) => m.name === "subscribe") || null;
       state.expandedTags = new Set(state.tags.map((tag) => tag.name));
       renderTags();
+      if (!location.hash) {
+        history.replaceState(null, "", `#method=${encodeURIComponent(DEFAULT_METHOD)}`);
+      }
       const hash = decodeURIComponent(location.hash.replace("#", ""));
       const topicMatch = hash.match(/topic=([^&]+)/);
       if (topicMatch) {
