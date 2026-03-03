@@ -28,7 +28,12 @@
         "schema": {
           "$ref": "#/components/schemas/CchOrderResponse"
         }
-      }
+      },
+      "tags": [
+        {
+          "name": "cch"
+        }
+      ]
     },
     {
       "name": "get_cch_order",
@@ -52,7 +57,12 @@
         "schema": {
           "$ref": "#/components/schemas/CchOrderResponse"
         }
-      }
+      },
+      "tags": [
+        {
+          "name": "cch"
+        }
+      ]
     },
     {
       "name": "send_btc",
@@ -76,7 +86,12 @@
         "schema": {
           "$ref": "#/components/schemas/CchOrderResponse"
         }
-      }
+      },
+      "tags": [
+        {
+          "name": "cch"
+        }
+      ]
     },
     {
       "name": "abandon_channel",
@@ -100,7 +115,12 @@
         "schema": {
           "type": "null"
         }
-      }
+      },
+      "tags": [
+        {
+          "name": "channel"
+        }
+      ]
     },
     {
       "name": "accept_channel",
@@ -124,7 +144,12 @@
         "schema": {
           "$ref": "#/components/schemas/AcceptChannelResult"
         }
-      }
+      },
+      "tags": [
+        {
+          "name": "channel"
+        }
+      ]
     },
     {
       "name": "shutdown_channel",
@@ -148,7 +173,12 @@
         "schema": {
           "type": "null"
         }
-      }
+      },
+      "tags": [
+        {
+          "name": "channel"
+        }
+      ]
     },
     {
       "name": "open_channel",
@@ -172,7 +202,12 @@
         "schema": {
           "$ref": "#/components/schemas/OpenChannelResult"
         }
-      }
+      },
+      "tags": [
+        {
+          "name": "channel"
+        }
+      ]
     },
     {
       "name": "update_channel",
@@ -196,7 +231,12 @@
         "schema": {
           "type": "null"
         }
-      }
+      },
+      "tags": [
+        {
+          "name": "channel"
+        }
+      ]
     },
     {
       "name": "list_channels",
@@ -220,7 +260,12 @@
         "schema": {
           "$ref": "#/components/schemas/ListChannelsResult"
         }
-      }
+      },
+      "tags": [
+        {
+          "name": "channel"
+        }
+      ]
     },
     {
       "name": "remove_tlc",
@@ -244,7 +289,12 @@
         "schema": {
           "type": "null"
         }
-      }
+      },
+      "tags": [
+        {
+          "name": "dev"
+        }
+      ]
     },
     {
       "name": "check_channel_shutdown",
@@ -268,7 +318,12 @@
         "schema": {
           "type": "null"
         }
-      }
+      },
+      "tags": [
+        {
+          "name": "dev"
+        }
+      ]
     },
     {
       "name": "commitment_signed",
@@ -292,7 +347,12 @@
         "schema": {
           "type": "null"
         }
-      }
+      },
+      "tags": [
+        {
+          "name": "dev"
+        }
+      ]
     },
     {
       "name": "add_tlc",
@@ -316,7 +376,12 @@
         "schema": {
           "$ref": "#/components/schemas/AddTlcResult"
         }
-      }
+      },
+      "tags": [
+        {
+          "name": "dev"
+        }
+      ]
     },
     {
       "name": "submit_commitment_transaction",
@@ -340,7 +405,12 @@
         "schema": {
           "$ref": "#/components/schemas/SubmitCommitmentTransactionResult"
         }
-      }
+      },
+      "tags": [
+        {
+          "name": "dev"
+        }
+      ]
     },
     {
       "name": "graph_channels",
@@ -364,7 +434,12 @@
         "schema": {
           "$ref": "#/components/schemas/GraphChannelsResult"
         }
-      }
+      },
+      "tags": [
+        {
+          "name": "graph"
+        }
+      ]
     },
     {
       "name": "graph_nodes",
@@ -388,7 +463,12 @@
         "schema": {
           "$ref": "#/components/schemas/GraphNodesResult"
         }
-      }
+      },
+      "tags": [
+        {
+          "name": "graph"
+        }
+      ]
     },
     {
       "name": "node_info",
@@ -402,7 +482,12 @@
         "schema": {
           "$ref": "#/components/schemas/NodeInfoResult"
         }
-      }
+      },
+      "tags": [
+        {
+          "name": "info"
+        }
+      ]
     },
     {
       "name": "parse_invoice",
@@ -426,7 +511,12 @@
         "schema": {
           "$ref": "#/components/schemas/ParseInvoiceResult"
         }
-      }
+      },
+      "tags": [
+        {
+          "name": "invoice"
+        }
+      ]
     },
     {
       "name": "new_invoice",
@@ -450,7 +540,12 @@
         "schema": {
           "$ref": "#/components/schemas/InvoiceResult"
         }
-      }
+      },
+      "tags": [
+        {
+          "name": "invoice"
+        }
+      ]
     },
     {
       "name": "settle_invoice",
@@ -474,7 +569,12 @@
         "schema": {
           "$ref": "#/components/schemas/SettleInvoiceResult"
         }
-      }
+      },
+      "tags": [
+        {
+          "name": "invoice"
+        }
+      ]
     },
     {
       "name": "get_invoice",
@@ -498,7 +598,12 @@
         "schema": {
           "$ref": "#/components/schemas/GetInvoiceResult"
         }
-      }
+      },
+      "tags": [
+        {
+          "name": "invoice"
+        }
+      ]
     },
     {
       "name": "cancel_invoice",
@@ -522,7 +627,12 @@
         "schema": {
           "$ref": "#/components/schemas/GetInvoiceResult"
         }
-      }
+      },
+      "tags": [
+        {
+          "name": "invoice"
+        }
+      ]
     },
     {
       "name": "send_payment",
@@ -546,7 +656,12 @@
         "schema": {
           "$ref": "#/components/schemas/GetPaymentCommandResult"
         }
-      }
+      },
+      "tags": [
+        {
+          "name": "payment"
+        }
+      ]
     },
     {
       "name": "send_payment_with_router",
@@ -570,7 +685,12 @@
         "schema": {
           "$ref": "#/components/schemas/GetPaymentCommandResult"
         }
-      }
+      },
+      "tags": [
+        {
+          "name": "payment"
+        }
+      ]
     },
     {
       "name": "build_router",
@@ -594,7 +714,12 @@
         "schema": {
           "$ref": "#/components/schemas/BuildPaymentRouterResult"
         }
-      }
+      },
+      "tags": [
+        {
+          "name": "payment"
+        }
+      ]
     },
     {
       "name": "get_payment",
@@ -618,7 +743,12 @@
         "schema": {
           "$ref": "#/components/schemas/GetPaymentCommandResult"
         }
-      }
+      },
+      "tags": [
+        {
+          "name": "payment"
+        }
+      ]
     },
     {
       "name": "list_peers",
@@ -632,7 +762,12 @@
         "schema": {
           "$ref": "#/components/schemas/ListPeersResult"
         }
-      }
+      },
+      "tags": [
+        {
+          "name": "peer"
+        }
+      ]
     },
     {
       "name": "connect_peer",
@@ -656,7 +791,12 @@
         "schema": {
           "type": "null"
         }
-      }
+      },
+      "tags": [
+        {
+          "name": "peer"
+        }
+      ]
     },
     {
       "name": "disconnect_peer",
@@ -680,7 +820,12 @@
         "schema": {
           "type": "null"
         }
-      }
+      },
+      "tags": [
+        {
+          "name": "peer"
+        }
+      ]
     },
     {
       "name": "update_pending_remote_settlement",
@@ -713,7 +858,12 @@
         "schema": {
           "type": "null"
         }
-      }
+      },
+      "tags": [
+        {
+          "name": "watchtower"
+        }
+      ]
     },
     {
       "name": "remove_preimage",
@@ -746,7 +896,12 @@
         "schema": {
           "type": "null"
         }
-      }
+      },
+      "tags": [
+        {
+          "name": "watchtower"
+        }
+      ]
     },
     {
       "name": "create_preimage",
@@ -779,7 +934,12 @@
         "schema": {
           "type": "null"
         }
-      }
+      },
+      "tags": [
+        {
+          "name": "watchtower"
+        }
+      ]
     },
     {
       "name": "update_revocation",
@@ -812,7 +972,12 @@
         "schema": {
           "type": "null"
         }
-      }
+      },
+      "tags": [
+        {
+          "name": "watchtower"
+        }
+      ]
     },
     {
       "name": "remove_watch_channel",
@@ -845,7 +1010,12 @@
         "schema": {
           "type": "null"
         }
-      }
+      },
+      "tags": [
+        {
+          "name": "watchtower"
+        }
+      ]
     },
     {
       "name": "update_local_settlement",
@@ -878,7 +1048,12 @@
         "schema": {
           "type": "null"
         }
-      }
+      },
+      "tags": [
+        {
+          "name": "watchtower"
+        }
+      ]
     },
     {
       "name": "create_watch_channel",
@@ -911,7 +1086,12 @@
         "schema": {
           "type": "null"
         }
-      }
+      },
+      "tags": [
+        {
+          "name": "watchtower"
+        }
+      ]
     }
   ],
   "components": {

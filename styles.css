@@ -117,8 +117,19 @@ body {
   font-size: 14px;
 }
 
-.field-search input {
-  width: 320px;
+.nav-search {
+  padding: 0 0 8px;
+}
+
+.nav-search input {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: rgba(11, 15, 20, 0.9);
+  color: var(--ink);
+  font-size: 13px;
+  box-sizing: border-box;
 }
 
 .app {

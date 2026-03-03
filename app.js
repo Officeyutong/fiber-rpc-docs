@@ -199,8 +199,8 @@ function schemaTypeLabel(schema) {
   if (schema.type) {
     return Array.isArray(schema.type) ? schema.type.join(" | ") : schema.type;
   }
-  if (schema.oneOf) return "oneOf";
-  if (schema.anyOf) return "anyOf";
+  if (schema.oneOf) return schema.oneOf.map(schemaTypeLabel).join(" | ");
+  if (schema.anyOf) return schema.anyOf.map(schemaTypeLabel).join(" | ");
   if (schema.allOf) return "allOf";
   return "schema";
 }
