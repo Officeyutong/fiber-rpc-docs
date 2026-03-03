@@ -550,8 +550,8 @@
     },
     {
       "name": "send_payment_with_router",
-      "summary": "Sends a payment to a peer with specified router",
-      "description": "Sends a payment to a peer with specified router\nThis method differs from SendPayment in that it allows users to specify a full route manually.\nThis can be used for things like rebalancing.",
+      "summary": "Sends a payment to a peer with specified router.",
+      "description": "Sends a payment to a peer with specified router.\nThis method differs from SendPayment in that it allows users to specify a full route manually.\n\nA typical use case is **channel rebalancing**: you can construct a circular route\n(your node -> intermediate nodes -> your node) to shift liquidity between your channels.\n\nTo rebalance, follow these steps:\n\n1. Call `build_router` with `hops_info` defining the circular route you want,\n   e.g. your_node -> peer_A -> peer_B -> your_node.\n2. Call `send_payment_with_router` with the returned `router_hops` and `keysend: true`.\n\nOnly routing fees are deducted; your total balance across channels remains the same.",
       "params": [
         {
           "name": "params",
@@ -565,8 +565,8 @@
       ],
       "result": {
         "name": "send_payment_with_router_result",
-        "summary": "Sends a payment to a peer with specified router",
-        "description": "Sends a payment to a peer with specified router\nThis method differs from SendPayment in that it allows users to specify a full route manually.\nThis can be used for things like rebalancing.\n",
+        "summary": "Sends a payment to a peer with specified router.",
+        "description": "Sends a payment to a peer with specified router.\nThis method differs from SendPayment in that it allows users to specify a full route manually.\n\nA typical use case is **channel rebalancing**: you can construct a circular route\n(your node -> intermediate nodes -> your node) to shift liquidity between your channels.\n\nTo rebalance, follow these steps:\n\n1. Call `build_router` with `hops_info` defining the circular route you want,\n   e.g. your_node -> peer_A -> peer_B -> your_node.\n2. Call `send_payment_with_router` with the returned `router_hops` and `keysend: true`.\n\nOnly routing fees are deducted; your total balance across channels remains the same.\n",
         "schema": {
           "$ref": "#/components/schemas/GetPaymentCommandResult"
         }
@@ -1446,8 +1446,8 @@
           "latest_commitment_transaction_hash",
           "local_balance",
           "offered_tlc_balance",
-          "peer_id",
           "pending_tlcs",
+          "pubkey",
           "received_tlc_balance",
           "remote_balance",
           "shutdown_transaction_hash",
@@ -1534,17 +1534,16 @@
             "type": "string",
             "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
           },
-          "peer_id": {
-            "description": "The peer ID of the channel",
-            "type": "string",
-            "format": "string"
-          },
           "pending_tlcs": {
             "description": "The list of pending tlcs",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Htlc"
             }
+          },
+          "pubkey": {
+            "description": "The public key of the channel counterparty.",
+            "$ref": "#/components/schemas/Pubkey"
           },
           "received_tlc_balance": {
             "description": "The received balance of the channel",
@@ -1616,11 +1615,11 @@
             "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
           },
           "node1": {
-            "description": "The identity public key of the first node.",
+            "description": "The identity public key of the first node (secp256k1 compressed, hex string).",
             "$ref": "#/components/schemas/Pubkey"
           },
           "node2": {
-            "description": "The identity public key of the second node.",
+            "description": "The identity public key of the second node (secp256k1 compressed, hex string).",
             "$ref": "#/components/schemas/Pubkey"
           },
           "udt_type_script": {
@@ -1978,9 +1977,27 @@
         ],
         "properties": {
           "address": {
-            "description": "The address of the peer to connect to.",
-            "type": "string",
-            "format": "string"
+            "description": "The address of the peer to connect to. Either `address` or `pubkey` must be provided.",
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "pubkey": {
+            "description": "The public key of the peer to connect to. The node resolves the address from locally synced graph data.",
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Pubkey"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "save": {
             "description": "Whether to save the peer address to the peer store.",
@@ -2104,13 +2121,12 @@
       "DisconnectPeerParams": {
         "type": "object",
         "required": [
-          "peer_id"
+          "pubkey"
         ],
         "properties": {
-          "peer_id": {
-            "description": "The peer ID of the peer to disconnect.",
-            "type": "string",
-            "format": "string"
+          "pubkey": {
+            "description": "The public key of the peer to disconnect.",
+            "$ref": "#/components/schemas/Pubkey"
           }
         }
       },
@@ -2565,13 +2581,11 @@
               "null"
             ]
           },
-          "peer_id": {
-            "description": "The peer ID to list channels for, an optional parameter, if not provided, all channels will be listed",
-            "default": null,
+          "pubkey": {
+            "description": "The public key to list channels for. An optional parameter, if not provided, all channels will be listed.",
             "anyOf": [
               {
-                "type": "string",
-                "format": "string"
+                "$ref": "#/components/schemas/Pubkey"
               },
               {
                 "type": "null"
@@ -2736,8 +2750,8 @@
           "auto_accept_min_ckb_funding_amount",
           "chain_hash",
           "features",
-          "node_id",
           "node_name",
+          "pubkey",
           "timestamp",
           "udt_cfg_infos",
           "version"
@@ -2767,13 +2781,13 @@
               "type": "string"
             }
           },
-          "node_id": {
-            "description": "The identity public key of the node.",
-            "$ref": "#/components/schemas/Pubkey"
-          },
           "node_name": {
             "description": "The name of the node.",
             "type": "string"
+          },
+          "pubkey": {
+            "description": "The identity public key of the node (secp256k1 compressed, hex string), same as `pubkey` in `list_peers`.",
+            "$ref": "#/components/schemas/Pubkey"
           },
           "timestamp": {
             "description": "The latest timestamp set by the owner for the node announcement. When a Node is online this timestamp will be updated to the latest value.",
@@ -2800,10 +2814,10 @@
           "commit_hash",
           "default_funding_lock_script",
           "features",
-          "node_id",
           "open_channel_auto_accept_min_ckb_funding_amount",
           "peers_count",
           "pending_channel_count",
+          "pubkey",
           "tlc_expiry_delta",
           "tlc_fee_proportional_millionths",
           "tlc_min_value",
@@ -2848,10 +2862,6 @@
               "type": "string"
             }
           },
-          "node_id": {
-            "description": "The identity public key of the node.",
-            "$ref": "#/components/schemas/Pubkey"
-          },
           "node_name": {
             "description": "The optional name of the node.",
             "type": [
@@ -2873,6 +2883,10 @@
             "description": "The number of pending channels associated with the node, serialized as a hexadecimal string.",
             "type": "string",
             "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+          },
+          "pubkey": {
+            "description": "The identity public key of this node (secp256k1 compressed, hex string).",
+            "$ref": "#/components/schemas/Pubkey"
           },
           "tlc_expiry_delta": {
             "description": "The locktime expiry delta for Time-Locked Contracts (TLC), serialized as a hexadecimal string.",
@@ -2903,7 +2917,7 @@
         "type": "object",
         "required": [
           "funding_amount",
-          "peer_id"
+          "pubkey"
         ],
         "properties": {
           "commitment_delay_epoch": {
@@ -2994,10 +3008,9 @@
               "null"
             ]
           },
-          "peer_id": {
-            "description": "The peer ID to open a channel with, the peer must be connected through the [connect_peer](#peer-connect_peer) rpc first.",
-            "type": "string",
-            "format": "string"
+          "pubkey": {
+            "description": "The public key of the peer to open a channel with. The peer must be connected through the [connect_peer](#peer-connect_peer) rpc first.",
+            "$ref": "#/components/schemas/Pubkey"
           },
           "public": {
             "description": "Whether this is a public channel (will be broadcasted to network, and can be used to forward TLCs), an optional parameter, default value is true.",
@@ -3175,17 +3188,11 @@
         "type": "object",
         "required": [
           "address",
-          "peer_id",
           "pubkey"
         ],
         "properties": {
           "address": {
             "description": "The multi-address associated with the connecting peer. Note: this is only the address which used for connecting to the peer, not all addresses of the peer. The `graph_nodes` in Graph rpc module will return all addresses of the peer.",
-            "type": "string",
-            "format": "string"
-          },
-          "peer_id": {
-            "description": "The peer ID of the peer",
             "type": "string",
             "format": "string"
           },
@@ -3201,7 +3208,7 @@
         "format": "any"
       },
       "Pubkey": {
-        "description": "The public key for a Node It stores the serialized form ([u8; 33]) directly for fast comparison and hashing",
+        "description": "A compressed secp256k1 public key (33 bytes), used as the primary identity of a node. In the RPC interface this value is exposed as fields such as `pubkey`. It is serialized as a 66-character hex string (e.g. `\"02aaaa...\"`) in JSON.",
         "type": "string",
         "pattern": "^([0-9a-fA-F]{2})*$"
       },
@@ -3452,7 +3459,7 @@
         "type": "object",
         "properties": {
           "allow_self_payment": {
-            "description": "allow self payment, default is false",
+            "description": "Allow paying yourself through a circular route, default is false. This is useful for **channel rebalancing**: the payment flows out of one channel and back through another, shifting liquidity between your channels without changing your total balance (only routing fees are deducted). Set `target_pubkey` to your own node pubkey and `keysend` to `true` to perform a rebalance. Note: `allow_self_payment` is not compatible with trampoline routing.",
             "type": [
               "boolean",
               "null"
@@ -3577,7 +3584,7 @@
             ]
           },
           "target_pubkey": {
-            "description": "the identifier of the payment target",
+            "description": "The public key (`Pubkey`) of the payment target node, serialized as a hex string. You can obtain a node's pubkey via the `node_info` or `graph_nodes` RPC.",
             "anyOf": [
               {
                 "$ref": "#/components/schemas/Pubkey"
