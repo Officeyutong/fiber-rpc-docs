@@ -1,0 +1,4222 @@
+{
+  "openrpc": "1.3.2",
+  "info": {
+    "title": "Fiber Network RPC",
+    "description": "RPC interface for Fiber Network",
+    "version": "0.7.1"
+  },
+  "methods": [
+    {
+      "name": "receive_btc",
+      "summary": "Creates a CCH order for a CKB Fiber payee.",
+      "description": "Creates a CCH order for a CKB Fiber payee.",
+      "params": [
+        {
+          "name": "params",
+          "summary": "",
+          "description": "",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/ReceiveBTCParams"
+          }
+        }
+      ],
+      "result": {
+        "name": "receive_btc_result",
+        "summary": "Creates a CCH order for a CKB Fiber payee.",
+        "description": "Creates a CCH order for a CKB Fiber payee.\n",
+        "schema": {
+          "$ref": "#/components/schemas/CchOrderResponse"
+        }
+      }
+    },
+    {
+      "name": "get_cch_order",
+      "summary": "Get a CCH order by payment hash.",
+      "description": "Get a CCH order by payment hash.",
+      "params": [
+        {
+          "name": "params",
+          "summary": "",
+          "description": "",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/GetCchOrderParams"
+          }
+        }
+      ],
+      "result": {
+        "name": "get_cch_order_result",
+        "summary": "Get a CCH order by payment hash.",
+        "description": "Get a CCH order by payment hash.\n",
+        "schema": {
+          "$ref": "#/components/schemas/CchOrderResponse"
+        }
+      }
+    },
+    {
+      "name": "send_btc",
+      "summary": "Creates a CCH order for a BTC Lightning payee.",
+      "description": "Creates a CCH order for a BTC Lightning payee.",
+      "params": [
+        {
+          "name": "params",
+          "summary": "",
+          "description": "",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/SendBTCParams"
+          }
+        }
+      ],
+      "result": {
+        "name": "send_btc_result",
+        "summary": "Creates a CCH order for a BTC Lightning payee.",
+        "description": "Creates a CCH order for a BTC Lightning payee.\n",
+        "schema": {
+          "$ref": "#/components/schemas/CchOrderResponse"
+        }
+      }
+    },
+    {
+      "name": "abandon_channel",
+      "summary": "Abandon a channel, this will remove the channel from the channel manager and DB.",
+      "description": "Abandon a channel, this will remove the channel from the channel manager and DB.\nOnly channels not in Ready or Closed state can be abandoned.",
+      "params": [
+        {
+          "name": "params",
+          "summary": "",
+          "description": "",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/AbandonChannelParams"
+          }
+        }
+      ],
+      "result": {
+        "name": "abandon_channel_result",
+        "summary": "Abandon a channel, this will remove the channel from the channel manager and DB.",
+        "description": "Abandon a channel, this will remove the channel from the channel manager and DB.\nOnly channels not in Ready or Closed state can be abandoned.\n",
+        "schema": {
+          "type": "null"
+        }
+      }
+    },
+    {
+      "name": "accept_channel",
+      "summary": "Accepts a channel opening request from a peer.",
+      "description": "Accepts a channel opening request from a peer.",
+      "params": [
+        {
+          "name": "params",
+          "summary": "",
+          "description": "",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/AcceptChannelParams"
+          }
+        }
+      ],
+      "result": {
+        "name": "accept_channel_result",
+        "summary": "Accepts a channel opening request from a peer.",
+        "description": "Accepts a channel opening request from a peer.\n",
+        "schema": {
+          "$ref": "#/components/schemas/AcceptChannelResult"
+        }
+      }
+    },
+    {
+      "name": "shutdown_channel",
+      "summary": "Shuts down a channel.",
+      "description": "Shuts down a channel.",
+      "params": [
+        {
+          "name": "params",
+          "summary": "",
+          "description": "",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/ShutdownChannelParams"
+          }
+        }
+      ],
+      "result": {
+        "name": "shutdown_channel_result",
+        "summary": "Shuts down a channel.",
+        "description": "Shuts down a channel.\n",
+        "schema": {
+          "type": "null"
+        }
+      }
+    },
+    {
+      "name": "open_channel",
+      "summary": "Attempts to open a channel with a peer.",
+      "description": "Attempts to open a channel with a peer.",
+      "params": [
+        {
+          "name": "params",
+          "summary": "",
+          "description": "",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/OpenChannelParams"
+          }
+        }
+      ],
+      "result": {
+        "name": "open_channel_result",
+        "summary": "Attempts to open a channel with a peer.",
+        "description": "Attempts to open a channel with a peer.\n",
+        "schema": {
+          "$ref": "#/components/schemas/OpenChannelResult"
+        }
+      }
+    },
+    {
+      "name": "update_channel",
+      "summary": "Updates a channel.",
+      "description": "Updates a channel.",
+      "params": [
+        {
+          "name": "params",
+          "summary": "",
+          "description": "",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/UpdateChannelParams"
+          }
+        }
+      ],
+      "result": {
+        "name": "update_channel_result",
+        "summary": "Updates a channel.",
+        "description": "Updates a channel.\n",
+        "schema": {
+          "type": "null"
+        }
+      }
+    },
+    {
+      "name": "list_channels",
+      "summary": "Lists all channels.",
+      "description": "Lists all channels.",
+      "params": [
+        {
+          "name": "params",
+          "summary": "",
+          "description": "",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/ListChannelsParams"
+          }
+        }
+      ],
+      "result": {
+        "name": "list_channels_result",
+        "summary": "Lists all channels.",
+        "description": "Lists all channels.\n",
+        "schema": {
+          "$ref": "#/components/schemas/ListChannelsResult"
+        }
+      }
+    },
+    {
+      "name": "remove_tlc",
+      "summary": "Removes a TLC from a channel.",
+      "description": "Removes a TLC from a channel.",
+      "params": [
+        {
+          "name": "params",
+          "summary": "",
+          "description": "",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/RemoveTlcParams"
+          }
+        }
+      ],
+      "result": {
+        "name": "remove_tlc_result",
+        "summary": "Removes a TLC from a channel.",
+        "description": "Removes a TLC from a channel.\n",
+        "schema": {
+          "type": "null"
+        }
+      }
+    },
+    {
+      "name": "check_channel_shutdown",
+      "summary": "Manually trigger CheckShutdownTx on all channels",
+      "description": "Manually trigger CheckShutdownTx on all channels",
+      "params": [
+        {
+          "name": "params",
+          "summary": "",
+          "description": "",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/CheckChannelShutdownParams"
+          }
+        }
+      ],
+      "result": {
+        "name": "check_channel_shutdown_result",
+        "summary": "Manually trigger CheckShutdownTx on all channels",
+        "description": "Manually trigger CheckShutdownTx on all channels\n",
+        "schema": {
+          "type": "null"
+        }
+      }
+    },
+    {
+      "name": "commitment_signed",
+      "summary": "Sends a commitment_signed message to the peer.",
+      "description": "Sends a commitment_signed message to the peer.",
+      "params": [
+        {
+          "name": "params",
+          "summary": "",
+          "description": "",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/CommitmentSignedParams"
+          }
+        }
+      ],
+      "result": {
+        "name": "commitment_signed_result",
+        "summary": "Sends a commitment_signed message to the peer.",
+        "description": "Sends a commitment_signed message to the peer.\n",
+        "schema": {
+          "type": "null"
+        }
+      }
+    },
+    {
+      "name": "add_tlc",
+      "summary": "Adds a TLC to a channel.",
+      "description": "Adds a TLC to a channel.",
+      "params": [
+        {
+          "name": "params",
+          "summary": "",
+          "description": "",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/AddTlcParams"
+          }
+        }
+      ],
+      "result": {
+        "name": "add_tlc_result",
+        "summary": "Adds a TLC to a channel.",
+        "description": "Adds a TLC to a channel.\n",
+        "schema": {
+          "$ref": "#/components/schemas/AddTlcResult"
+        }
+      }
+    },
+    {
+      "name": "submit_commitment_transaction",
+      "summary": "Submit a commitment transaction to the chain",
+      "description": "Submit a commitment transaction to the chain",
+      "params": [
+        {
+          "name": "params",
+          "summary": "",
+          "description": "",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/SubmitCommitmentTransactionParams"
+          }
+        }
+      ],
+      "result": {
+        "name": "submit_commitment_transaction_result",
+        "summary": "Submit a commitment transaction to the chain",
+        "description": "Submit a commitment transaction to the chain\n",
+        "schema": {
+          "$ref": "#/components/schemas/SubmitCommitmentTransactionResult"
+        }
+      }
+    },
+    {
+      "name": "graph_channels",
+      "summary": "Get the list of channels in the network graph.",
+      "description": "Get the list of channels in the network graph.",
+      "params": [
+        {
+          "name": "params",
+          "summary": "",
+          "description": "",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/GraphChannelsParams"
+          }
+        }
+      ],
+      "result": {
+        "name": "graph_channels_result",
+        "summary": "Get the list of channels in the network graph.",
+        "description": "Get the list of channels in the network graph.\n",
+        "schema": {
+          "$ref": "#/components/schemas/GraphChannelsResult"
+        }
+      }
+    },
+    {
+      "name": "graph_nodes",
+      "summary": "Get the list of nodes in the network graph.",
+      "description": "Get the list of nodes in the network graph.",
+      "params": [
+        {
+          "name": "params",
+          "summary": "",
+          "description": "",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/GraphNodesParams"
+          }
+        }
+      ],
+      "result": {
+        "name": "graph_nodes_result",
+        "summary": "Get the list of nodes in the network graph.",
+        "description": "Get the list of nodes in the network graph.\n",
+        "schema": {
+          "$ref": "#/components/schemas/GraphNodesResult"
+        }
+      }
+    },
+    {
+      "name": "node_info",
+      "summary": "Get the node information.",
+      "description": "Get the node information.",
+      "params": [],
+      "result": {
+        "name": "node_info_result",
+        "summary": "Get the node information.",
+        "description": "Get the node information.\n",
+        "schema": {
+          "$ref": "#/components/schemas/NodeInfoResult"
+        }
+      }
+    },
+    {
+      "name": "parse_invoice",
+      "summary": "Parses a encoded invoice.",
+      "description": "Parses a encoded invoice.",
+      "params": [
+        {
+          "name": "params",
+          "summary": "",
+          "description": "",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/ParseInvoiceParams"
+          }
+        }
+      ],
+      "result": {
+        "name": "parse_invoice_result",
+        "summary": "Parses a encoded invoice.",
+        "description": "Parses a encoded invoice.\n",
+        "schema": {
+          "$ref": "#/components/schemas/ParseInvoiceResult"
+        }
+      }
+    },
+    {
+      "name": "new_invoice",
+      "summary": "Generates a new invoice.",
+      "description": "Generates a new invoice.",
+      "params": [
+        {
+          "name": "params",
+          "summary": "",
+          "description": "",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/NewInvoiceParams"
+          }
+        }
+      ],
+      "result": {
+        "name": "new_invoice_result",
+        "summary": "Generates a new invoice.",
+        "description": "Generates a new invoice.\n",
+        "schema": {
+          "$ref": "#/components/schemas/InvoiceResult"
+        }
+      }
+    },
+    {
+      "name": "settle_invoice",
+      "summary": "Settles an invoice by saving the preimage to this invoice.",
+      "description": "Settles an invoice by saving the preimage to this invoice.",
+      "params": [
+        {
+          "name": "settle_invoice",
+          "summary": "",
+          "description": "",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/SettleInvoiceParams"
+          }
+        }
+      ],
+      "result": {
+        "name": "settle_invoice_result",
+        "summary": "Settles an invoice by saving the preimage to this invoice.",
+        "description": "Settles an invoice by saving the preimage to this invoice.\n",
+        "schema": {
+          "$ref": "#/components/schemas/SettleInvoiceResult"
+        }
+      }
+    },
+    {
+      "name": "get_invoice",
+      "summary": "Retrieves an invoice.",
+      "description": "Retrieves an invoice.",
+      "params": [
+        {
+          "name": "payment_hash",
+          "summary": "",
+          "description": "",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/InvoiceParams"
+          }
+        }
+      ],
+      "result": {
+        "name": "get_invoice_result",
+        "summary": "Retrieves an invoice.",
+        "description": "Retrieves an invoice.\n",
+        "schema": {
+          "$ref": "#/components/schemas/GetInvoiceResult"
+        }
+      }
+    },
+    {
+      "name": "cancel_invoice",
+      "summary": "Cancels an invoice, only when invoice is in status `Open` can be canceled.",
+      "description": "Cancels an invoice, only when invoice is in status `Open` can be canceled.",
+      "params": [
+        {
+          "name": "payment_hash",
+          "summary": "",
+          "description": "",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/InvoiceParams"
+          }
+        }
+      ],
+      "result": {
+        "name": "cancel_invoice_result",
+        "summary": "Cancels an invoice, only when invoice is in status `Open` can be canceled.",
+        "description": "Cancels an invoice, only when invoice is in status `Open` can be canceled.\n",
+        "schema": {
+          "$ref": "#/components/schemas/GetInvoiceResult"
+        }
+      }
+    },
+    {
+      "name": "send_payment",
+      "summary": "Sends a payment to a peer.",
+      "description": "Sends a payment to a peer.",
+      "params": [
+        {
+          "name": "params",
+          "summary": "",
+          "description": "",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/SendPaymentCommandParams"
+          }
+        }
+      ],
+      "result": {
+        "name": "send_payment_result",
+        "summary": "Sends a payment to a peer.",
+        "description": "Sends a payment to a peer.\n",
+        "schema": {
+          "$ref": "#/components/schemas/GetPaymentCommandResult"
+        }
+      }
+    },
+    {
+      "name": "send_payment_with_router",
+      "summary": "Sends a payment to a peer with specified router",
+      "description": "Sends a payment to a peer with specified router\nThis method differs from SendPayment in that it allows users to specify a full route manually.\nThis can be used for things like rebalancing.",
+      "params": [
+        {
+          "name": "params",
+          "summary": "",
+          "description": "",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/SendPaymentWithRouterParams"
+          }
+        }
+      ],
+      "result": {
+        "name": "send_payment_with_router_result",
+        "summary": "Sends a payment to a peer with specified router",
+        "description": "Sends a payment to a peer with specified router\nThis method differs from SendPayment in that it allows users to specify a full route manually.\nThis can be used for things like rebalancing.\n",
+        "schema": {
+          "$ref": "#/components/schemas/GetPaymentCommandResult"
+        }
+      }
+    },
+    {
+      "name": "build_router",
+      "summary": "Builds a router with a list of pubkeys and required channels.",
+      "description": "Builds a router with a list of pubkeys and required channels.",
+      "params": [
+        {
+          "name": "params",
+          "summary": "",
+          "description": "",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/BuildRouterParams"
+          }
+        }
+      ],
+      "result": {
+        "name": "build_router_result",
+        "summary": "Builds a router with a list of pubkeys and required channels.",
+        "description": "Builds a router with a list of pubkeys and required channels.\n",
+        "schema": {
+          "$ref": "#/components/schemas/BuildPaymentRouterResult"
+        }
+      }
+    },
+    {
+      "name": "get_payment",
+      "summary": "Retrieves a payment.",
+      "description": "Retrieves a payment.",
+      "params": [
+        {
+          "name": "params",
+          "summary": "",
+          "description": "",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/GetPaymentCommandParams"
+          }
+        }
+      ],
+      "result": {
+        "name": "get_payment_result",
+        "summary": "Retrieves a payment.",
+        "description": "Retrieves a payment.\n",
+        "schema": {
+          "$ref": "#/components/schemas/GetPaymentCommandResult"
+        }
+      }
+    },
+    {
+      "name": "list_peers",
+      "summary": "List connected peers",
+      "description": "List connected peers",
+      "params": [],
+      "result": {
+        "name": "list_peers_result",
+        "summary": "List connected peers",
+        "description": "List connected peers\n",
+        "schema": {
+          "$ref": "#/components/schemas/ListPeersResult"
+        }
+      }
+    },
+    {
+      "name": "connect_peer",
+      "summary": "Connect to a peer.",
+      "description": "Connect to a peer.",
+      "params": [
+        {
+          "name": "params",
+          "summary": "",
+          "description": "",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/ConnectPeerParams"
+          }
+        }
+      ],
+      "result": {
+        "name": "connect_peer_result",
+        "summary": "Connect to a peer.",
+        "description": "Connect to a peer.\n",
+        "schema": {
+          "type": "null"
+        }
+      }
+    },
+    {
+      "name": "disconnect_peer",
+      "summary": "Disconnect from a peer.",
+      "description": "Disconnect from a peer.",
+      "params": [
+        {
+          "name": "params",
+          "summary": "",
+          "description": "",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/DisconnectPeerParams"
+          }
+        }
+      ],
+      "result": {
+        "name": "disconnect_peer_result",
+        "summary": "Disconnect from a peer.",
+        "description": "Disconnect from a peer.\n",
+        "schema": {
+          "type": "null"
+        }
+      }
+    },
+    {
+      "name": "update_pending_remote_settlement",
+      "summary": "Update pending remote settlement",
+      "description": "Update pending remote settlement",
+      "params": [
+        {
+          "name": "ctx",
+          "summary": "",
+          "description": "",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/RpcContext"
+          }
+        },
+        {
+          "name": "params",
+          "summary": "",
+          "description": "",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/UpdatePendingRemoteSettlementParams"
+          }
+        }
+      ],
+      "result": {
+        "name": "update_pending_remote_settlement_result",
+        "summary": "Update pending remote settlement",
+        "description": "Update pending remote settlement\n",
+        "schema": {
+          "type": "null"
+        }
+      }
+    },
+    {
+      "name": "remove_preimage",
+      "summary": "Remove preimage",
+      "description": "Remove preimage",
+      "params": [
+        {
+          "name": "ctx",
+          "summary": "",
+          "description": "",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/RpcContext"
+          }
+        },
+        {
+          "name": "params",
+          "summary": "",
+          "description": "",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/RemovePreimageParams"
+          }
+        }
+      ],
+      "result": {
+        "name": "remove_preimage_result",
+        "summary": "Remove preimage",
+        "description": "Remove preimage\n",
+        "schema": {
+          "type": "null"
+        }
+      }
+    },
+    {
+      "name": "create_preimage",
+      "summary": "Create preimage",
+      "description": "Create preimage",
+      "params": [
+        {
+          "name": "ctx",
+          "summary": "",
+          "description": "",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/RpcContext"
+          }
+        },
+        {
+          "name": "params",
+          "summary": "",
+          "description": "",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/CreatePreimageParams"
+          }
+        }
+      ],
+      "result": {
+        "name": "create_preimage_result",
+        "summary": "Create preimage",
+        "description": "Create preimage\n",
+        "schema": {
+          "type": "null"
+        }
+      }
+    },
+    {
+      "name": "update_revocation",
+      "summary": "Update revocation",
+      "description": "Update revocation",
+      "params": [
+        {
+          "name": "ctx",
+          "summary": "",
+          "description": "",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/RpcContext"
+          }
+        },
+        {
+          "name": "params",
+          "summary": "",
+          "description": "",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/UpdateRevocationParams"
+          }
+        }
+      ],
+      "result": {
+        "name": "update_revocation_result",
+        "summary": "Update revocation",
+        "description": "Update revocation\n",
+        "schema": {
+          "type": "null"
+        }
+      }
+    },
+    {
+      "name": "remove_watch_channel",
+      "summary": "Remove a watched channel",
+      "description": "Remove a watched channel",
+      "params": [
+        {
+          "name": "ctx",
+          "summary": "",
+          "description": "",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/RpcContext"
+          }
+        },
+        {
+          "name": "params",
+          "summary": "",
+          "description": "",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/RemoveWatchChannelParams"
+          }
+        }
+      ],
+      "result": {
+        "name": "remove_watch_channel_result",
+        "summary": "Remove a watched channel",
+        "description": "Remove a watched channel\n",
+        "schema": {
+          "type": "null"
+        }
+      }
+    },
+    {
+      "name": "update_local_settlement",
+      "summary": "Update settlement",
+      "description": "Update settlement",
+      "params": [
+        {
+          "name": "ctx",
+          "summary": "",
+          "description": "",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/RpcContext"
+          }
+        },
+        {
+          "name": "params",
+          "summary": "",
+          "description": "",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/UpdateLocalSettlementParams"
+          }
+        }
+      ],
+      "result": {
+        "name": "update_local_settlement_result",
+        "summary": "Update settlement",
+        "description": "Update settlement\n",
+        "schema": {
+          "type": "null"
+        }
+      }
+    },
+    {
+      "name": "create_watch_channel",
+      "summary": "Create a new watched channel",
+      "description": "Create a new watched channel",
+      "params": [
+        {
+          "name": "ctx",
+          "summary": "",
+          "description": "",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/RpcContext"
+          }
+        },
+        {
+          "name": "params",
+          "summary": "",
+          "description": "",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/CreateWatchChannelParams"
+          }
+        }
+      ],
+      "result": {
+        "name": "create_watch_channel_result",
+        "summary": "Create a new watched channel",
+        "description": "Create a new watched channel\n",
+        "schema": {
+          "type": "null"
+        }
+      }
+    }
+  ],
+  "components": {
+    "schemas": {
+      "AbandonChannelParams": {
+        "type": "object",
+        "required": [
+          "channel_id"
+        ],
+        "properties": {
+          "channel_id": {
+            "description": "The temporary channel ID or real channel ID of the channel being abandoned",
+            "$ref": "#/components/schemas/Hash256"
+          }
+        }
+      },
+      "AcceptChannelParams": {
+        "type": "object",
+        "required": [
+          "funding_amount",
+          "temporary_channel_id"
+        ],
+        "properties": {
+          "funding_amount": {
+            "description": "The amount of CKB or UDT to fund the channel with",
+            "type": "string",
+            "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+          },
+          "max_tlc_number_in_flight": {
+            "description": "The max tlc number in flight send from our side, default is 125 This parameter can not be updated after channel is opened.",
+            "default": null,
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "max_tlc_value_in_flight": {
+            "description": "The max tlc sum value in flight for the channel, default is u128::MAX This parameter can not be updated after channel is opened.",
+            "default": null,
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "shutdown_script": {
+            "description": "The script used to receive the channel balance, an optional parameter, default value is the secp256k1_blake160_sighash_all script corresponding to the configured private key",
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Script"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "temporary_channel_id": {
+            "description": "The temporary channel ID of the channel to accept",
+            "$ref": "#/components/schemas/Hash256"
+          },
+          "tlc_expiry_delta": {
+            "description": "The expiry delta to forward a tlc, in milliseconds, default to 1 day, which is 24 * 60 * 60 * 1000 milliseconds This parameter can be updated with rpc `update_channel` later.",
+            "default": null,
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tlc_fee_proportional_millionths": {
+            "description": "The fee proportional millionths for a TLC, proportional to the amount of the forwarded tlc. The unit is millionths of the amount. default is 1000 which means 0.1%. This parameter can be updated with rpc `update_channel` later. Not that, we use outbound channel to calculate the fee for TLC forwarding. For example, if we have a path A -> B -> C, then the fee B requires for TLC forwarding, is calculated the channel configuration of B and C, not A and B.",
+            "default": null,
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tlc_min_value": {
+            "description": "The minimum value for a TLC our side can send, an optional parameter, default is 0, which means we can send any TLC is larger than 0. This parameter can be updated with rpc `update_channel` later.",
+            "default": null,
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        }
+      },
+      "AcceptChannelResult": {
+        "type": "object",
+        "required": [
+          "channel_id"
+        ],
+        "properties": {
+          "channel_id": {
+            "description": "The final ID of the channel that was accepted, it's different from the temporary channel ID",
+            "$ref": "#/components/schemas/Hash256"
+          }
+        }
+      },
+      "AddTlcParams": {
+        "type": "object",
+        "required": [
+          "amount",
+          "channel_id",
+          "expiry",
+          "payment_hash"
+        ],
+        "properties": {
+          "amount": {
+            "description": "The amount of the TLC",
+            "type": "string",
+            "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+          },
+          "channel_id": {
+            "description": "The channel ID of the channel to add the TLC to",
+            "$ref": "#/components/schemas/Hash256"
+          },
+          "expiry": {
+            "description": "The expiry of the TLC",
+            "type": "string",
+            "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+          },
+          "hash_algorithm": {
+            "description": "The hash algorithm of the TLC",
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/HashAlgorithm"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "payment_hash": {
+            "description": "The payment hash of the TLC",
+            "$ref": "#/components/schemas/Hash256"
+          }
+        }
+      },
+      "AddTlcResult": {
+        "type": "object",
+        "required": [
+          "tlc_id"
+        ],
+        "properties": {
+          "tlc_id": {
+            "description": "The ID of the TLC",
+            "type": "string",
+            "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+          }
+        }
+      },
+      "Attribute": {
+        "description": "The attributes of the invoice",
+        "oneOf": [
+          {
+            "description": "This attribute is deprecated since v0.6.0, The final tlc time out, in milliseconds",
+            "type": "object",
+            "required": [
+              "final_htlc_timeout"
+            ],
+            "properties": {
+              "final_htlc_timeout": {
+                "type": "string",
+                "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+              }
+            },
+            "additionalProperties": false
+          },
+          {
+            "description": "The final tlc minimum expiry delta, in milliseconds, default is 1 day",
+            "type": "object",
+            "required": [
+              "final_htlc_minimum_expiry_delta"
+            ],
+            "properties": {
+              "final_htlc_minimum_expiry_delta": {
+                "type": "string",
+                "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+              }
+            },
+            "additionalProperties": false
+          },
+          {
+            "description": "The expiry time of the invoice, in seconds",
+            "type": "object",
+            "required": [
+              "expiry_time"
+            ],
+            "properties": {
+              "expiry_time": {
+                "type": "string",
+                "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+              }
+            },
+            "additionalProperties": false
+          },
+          {
+            "description": "The description of the invoice",
+            "type": "object",
+            "required": [
+              "description"
+            ],
+            "properties": {
+              "description": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          },
+          {
+            "description": "The fallback address of the invoice",
+            "type": "object",
+            "required": [
+              "fallback_addr"
+            ],
+            "properties": {
+              "fallback_addr": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          },
+          {
+            "description": "The udt type script of the invoice",
+            "type": "object",
+            "required": [
+              "udt_script"
+            ],
+            "properties": {
+              "udt_script": {
+                "$ref": "#/components/schemas/CkbScript"
+              }
+            },
+            "additionalProperties": false
+          },
+          {
+            "description": "The payee public key of the invoice",
+            "type": "object",
+            "required": [
+              "payee_public_key"
+            ],
+            "properties": {
+              "payee_public_key": {
+                "type": "string",
+                "pattern": "^([0-9a-fA-F]{2})*$"
+              }
+            },
+            "additionalProperties": false
+          },
+          {
+            "description": "The hash algorithm of the invoice",
+            "type": "object",
+            "required": [
+              "hash_algorithm"
+            ],
+            "properties": {
+              "hash_algorithm": {
+                "$ref": "#/components/schemas/HashAlgorithm"
+              }
+            },
+            "additionalProperties": false
+          },
+          {
+            "description": "The feature flags of the invoice",
+            "type": "object",
+            "required": [
+              "feature"
+            ],
+            "properties": {
+              "feature": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "additionalProperties": false
+          },
+          {
+            "description": "The payment secret of the invoice",
+            "type": "object",
+            "required": [
+              "payment_secret"
+            ],
+            "properties": {
+              "payment_secret": {
+                "$ref": "#/components/schemas/Hash256"
+              }
+            },
+            "additionalProperties": false
+          }
+        ]
+      },
+      "BuildPaymentRouterResult": {
+        "description": "The router returned by build_router",
+        "type": "object",
+        "required": [
+          "router_hops"
+        ],
+        "properties": {
+          "router_hops": {
+            "description": "The hops information for router",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RouterHop"
+            }
+          }
+        }
+      },
+      "BuildRouterParams": {
+        "type": "object",
+        "required": [
+          "hops_info"
+        ],
+        "properties": {
+          "amount": {
+            "description": "the amount of the payment, the unit is Shannons for non UDT payment If not set, the minimum routable amount `1` is used",
+            "default": null,
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "final_tlc_expiry_delta": {
+            "description": "the TLC expiry delta should be used to set the timelock for the final hop, in milliseconds",
+            "default": null,
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "hops_info": {
+            "description": "A list of hops that defines the route. This does not include the source hop pubkey. A hop info is a tuple of pubkey and the channel(specified by channel funding tx) will be used. This is a strong restriction given on payment router, which means these specified hops and channels must be adapted in the router. This is different from hop hints, which maybe ignored by find path. If channel is not specified, find path algorithm will pick a channel within these two peers.\n\nAn error will be returned if there is no router could be build from given hops and channels",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HopRequire"
+            }
+          },
+          "udt_type_script": {
+            "description": "udt type script for the payment router",
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Script"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        }
+      },
+      "CchInvoice": {
+        "description": "The generated proxy invoice for the incoming payment.\n\nThe JSON representation:\n\n```text\n { \"Fiber\": String } | { \"Lightning\": String }\n```",
+        "oneOf": [
+          {
+            "description": "Fiber invoice that once paid, the hub will send the outgoing payment to Lightning",
+            "type": "object",
+            "required": [
+              "Fiber"
+            ],
+            "properties": {
+              "Fiber": {
+                "type": "string",
+                "format": "string"
+              }
+            },
+            "additionalProperties": false
+          },
+          {
+            "description": "Lightning invoice that once paid, the hub will send the outgoing payment to Fiber",
+            "type": "object",
+            "required": [
+              "Lightning"
+            ],
+            "properties": {
+              "Lightning": {
+                "type": "string",
+                "format": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        ]
+      },
+      "CchOrderResponse": {
+        "type": "object",
+        "required": [
+          "amount_sats",
+          "expiry_delta_seconds",
+          "fee_sats",
+          "incoming_invoice",
+          "outgoing_pay_req",
+          "payment_hash",
+          "status",
+          "timestamp",
+          "wrapped_btc_type_script"
+        ],
+        "properties": {
+          "amount_sats": {
+            "description": "Amount required to pay in Satoshis, including fee",
+            "type": "string",
+            "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+          },
+          "expiry_delta_seconds": {
+            "description": "Relative expiry time in seconds from `created_at` that the order expires",
+            "type": "string",
+            "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+          },
+          "fee_sats": {
+            "description": "Fee in Satoshis",
+            "type": "string",
+            "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+          },
+          "incoming_invoice": {
+            "description": "Generated invoice for the incoming payment",
+            "$ref": "#/components/schemas/CchInvoice"
+          },
+          "outgoing_pay_req": {
+            "description": "The final payee to accept the payment. It has the different network with incoming invoice.",
+            "type": "string"
+          },
+          "payment_hash": {
+            "description": "Payment hash for the HTLC for both CKB and BTC.",
+            "$ref": "#/components/schemas/Hash256"
+          },
+          "status": {
+            "description": "Order status",
+            "$ref": "#/components/schemas/CchOrderStatus"
+          },
+          "timestamp": {
+            "description": "Seconds since epoch when the order is created",
+            "type": "string",
+            "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+          },
+          "wrapped_btc_type_script": {
+            "description": "Wrapped BTC type script",
+            "$ref": "#/components/schemas/Script"
+          }
+        }
+      },
+      "CchOrderStatus": {
+        "description": "The status of a cross-chain hub order, will update as the order progresses.",
+        "oneOf": [
+          {
+            "description": "Order is created and waiting for the incoming invoice to collect enough TLCs.",
+            "type": "string",
+            "enum": [
+              "pending"
+            ]
+          },
+          {
+            "description": "The incoming invoice collected the required TLCs and is ready to send outgoing payment to obtain the preimage.",
+            "type": "string",
+            "enum": [
+              "incoming_accepted"
+            ]
+          },
+          {
+            "description": "The outgoing payment is in flight.",
+            "type": "string",
+            "enum": [
+              "outgoing_in_flight"
+            ]
+          },
+          {
+            "description": "The outgoing payment is settled and preimage has been obtained.",
+            "type": "string",
+            "enum": [
+              "outgoing_succeeded"
+            ]
+          },
+          {
+            "description": "Both payments are settled and the order succeeds.",
+            "type": "string",
+            "enum": [
+              "succeeded"
+            ]
+          },
+          {
+            "description": "Order is failed.",
+            "type": "string",
+            "enum": [
+              "failed"
+            ]
+          }
+        ]
+      },
+      "Channel": {
+        "description": "The channel data structure",
+        "type": "object",
+        "required": [
+          "channel_id",
+          "created_at",
+          "enabled",
+          "is_acceptor",
+          "is_one_way",
+          "is_public",
+          "latest_commitment_transaction_hash",
+          "local_balance",
+          "offered_tlc_balance",
+          "peer_id",
+          "pending_tlcs",
+          "received_tlc_balance",
+          "remote_balance",
+          "shutdown_transaction_hash",
+          "state",
+          "tlc_expiry_delta",
+          "tlc_fee_proportional_millionths"
+        ],
+        "properties": {
+          "channel_id": {
+            "description": "The channel ID",
+            "$ref": "#/components/schemas/Hash256"
+          },
+          "channel_outpoint": {
+            "description": "The outpoint of the channel",
+            "default": null,
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^0x([0-9a-fA-F]{2})*$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "created_at": {
+            "description": "The time the channel was created at, in milliseconds from UNIX epoch",
+            "type": "string",
+            "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+          },
+          "enabled": {
+            "description": "Whether the channel is enabled",
+            "type": "boolean"
+          },
+          "failure_detail": {
+            "description": "Human-readable reason why the channel opening failed. Only present when the channel is in a failed state (e.g. abandoned or funding aborted).",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "funding_udt_type_script": {
+            "description": "The UDT type script of the channel",
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Script"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "is_acceptor": {
+            "description": "Is this channel initially inbound? An inbound channel is one where the counterparty is the funder of the channel.",
+            "type": "boolean"
+          },
+          "is_one_way": {
+            "description": "Is this channel one-way? Combines with is_acceptor to determine if the channel able to send payment to the counterparty or not.",
+            "type": "boolean"
+          },
+          "is_public": {
+            "description": "Whether the channel is public",
+            "type": "boolean"
+          },
+          "latest_commitment_transaction_hash": {
+            "description": "The hash of the latest commitment transaction",
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^0x([0-9a-fA-F]{2})*$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "local_balance": {
+            "description": "The local balance of the channel",
+            "type": "string",
+            "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+          },
+          "offered_tlc_balance": {
+            "description": "The offered balance of the channel",
+            "type": "string",
+            "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+          },
+          "peer_id": {
+            "description": "The peer ID of the channel",
+            "type": "string",
+            "format": "string"
+          },
+          "pending_tlcs": {
+            "description": "The list of pending tlcs",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Htlc"
+            }
+          },
+          "received_tlc_balance": {
+            "description": "The received balance of the channel",
+            "type": "string",
+            "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+          },
+          "remote_balance": {
+            "description": "The remote balance of the channel",
+            "type": "string",
+            "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+          },
+          "shutdown_transaction_hash": {
+            "description": "The hash of the shutdown transaction",
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^0x([0-9a-fA-F]{2})*$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "state": {
+            "description": "The state of the channel",
+            "$ref": "#/components/schemas/ChannelState"
+          },
+          "tlc_expiry_delta": {
+            "description": "The expiry delta to forward a tlc, in milliseconds, default to 1 day, which is 24 * 60 * 60 * 1000 milliseconds This parameter can be updated with rpc `update_channel` later.",
+            "type": "string",
+            "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+          },
+          "tlc_fee_proportional_millionths": {
+            "description": "The fee proportional millionths for a TLC, proportional to the amount of the forwarded tlc. The unit is millionths of the amount. default is 1000 which means 0.1%. This parameter can be updated with rpc `update_channel` later. Not that, we use outbound channel to calculate the fee for TLC forwarding. For example, if we have a path A -> B -> C, then the fee B requires for TLC forwarding, is calculated the channel configuration of B and C, not A and B.",
+            "type": "string",
+            "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+          }
+        }
+      },
+      "ChannelInfo": {
+        "description": "The Channel information.",
+        "type": "object",
+        "required": [
+          "capacity",
+          "chain_hash",
+          "channel_outpoint",
+          "created_timestamp",
+          "node1",
+          "node2"
+        ],
+        "properties": {
+          "capacity": {
+            "description": "The capacity of the channel.",
+            "type": "string",
+            "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+          },
+          "chain_hash": {
+            "description": "The chain hash of the channel.",
+            "$ref": "#/components/schemas/Hash256"
+          },
+          "channel_outpoint": {
+            "description": "The outpoint of the channel.",
+            "type": "string",
+            "pattern": "^0x([0-9a-fA-F]{2})*$"
+          },
+          "created_timestamp": {
+            "description": "The created timestamp of the channel, which is the block header timestamp of the block that contains the channel funding transaction.",
+            "type": "string",
+            "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+          },
+          "node1": {
+            "description": "The identity public key of the first node.",
+            "$ref": "#/components/schemas/Pubkey"
+          },
+          "node2": {
+            "description": "The identity public key of the second node.",
+            "$ref": "#/components/schemas/Pubkey"
+          },
+          "udt_type_script": {
+            "description": "The UDT type script of the channel.",
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Script"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "update_info_of_node1": {
+            "description": "The update info from node1 to node2, e.g. timestamp, fee_rate, tlc_expiry_delta, tlc_minimum_value",
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ChannelUpdateInfo"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "update_info_of_node2": {
+            "description": "The update info from node2 to node1, e.g. timestamp, fee_rate, tlc_expiry_delta, tlc_minimum_value",
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ChannelUpdateInfo"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        }
+      },
+      "ChannelState": {
+        "description": "The state of a channel",
+        "oneOf": [
+          {
+            "description": "We are negotiating the parameters required for the channel prior to funding it.",
+            "type": "object",
+            "required": [
+              "state_flags",
+              "state_name"
+            ],
+            "properties": {
+              "state_flags": {
+                "type": "integer"
+              },
+              "state_name": {
+                "type": "string",
+                "enum": [
+                  "NEGOTIATING_FUNDING"
+                ]
+              }
+            }
+          },
+          {
+            "description": "We're collaborating with the other party on the funding transaction.",
+            "type": "object",
+            "required": [
+              "state_flags",
+              "state_name"
+            ],
+            "properties": {
+              "state_flags": {
+                "type": "integer"
+              },
+              "state_name": {
+                "type": "string",
+                "enum": [
+                  "COLLABORATING_FUNDING_TX"
+                ]
+              }
+            }
+          },
+          {
+            "description": "We have collaborated over the funding and are now waiting for CommitmentSigned messages.",
+            "type": "object",
+            "required": [
+              "state_flags",
+              "state_name"
+            ],
+            "properties": {
+              "state_flags": {
+                "type": "integer"
+              },
+              "state_name": {
+                "type": "string",
+                "enum": [
+                  "SIGNING_COMMITMENT"
+                ]
+              }
+            }
+          },
+          {
+            "description": "We've received and sent `commitment_signed` and are now waiting for both party to collaborate on creating a valid funding transaction.",
+            "type": "object",
+            "required": [
+              "state_flags",
+              "state_name"
+            ],
+            "properties": {
+              "state_flags": {
+                "type": "integer"
+              },
+              "state_name": {
+                "type": "string",
+                "enum": [
+                  "AWAITING_TX_SIGNATURES"
+                ]
+              }
+            }
+          },
+          {
+            "description": "We've received/sent `funding_created` and `funding_signed` and are thus now waiting on the funding transaction to confirm.",
+            "type": "object",
+            "required": [
+              "state_flags",
+              "state_name"
+            ],
+            "properties": {
+              "state_flags": {
+                "type": "integer"
+              },
+              "state_name": {
+                "type": "string",
+                "enum": [
+                  "AWAITING_CHANNEL_READY"
+                ]
+              }
+            }
+          },
+          {
+            "description": "Both we and our counterparty consider the funding transaction confirmed and the channel is now operational.",
+            "type": "object",
+            "required": [
+              "state_name"
+            ],
+            "properties": {
+              "state_name": {
+                "type": "string",
+                "enum": [
+                  "CHANNEL_READY"
+                ]
+              }
+            }
+          },
+          {
+            "description": "We've successfully negotiated a `closing_signed` dance. At this point, the `ChannelManager`",
+            "type": "object",
+            "required": [
+              "state_flags",
+              "state_name"
+            ],
+            "properties": {
+              "state_flags": {
+                "type": "integer"
+              },
+              "state_name": {
+                "type": "string",
+                "enum": [
+                  "SHUTTING_DOWN"
+                ]
+              }
+            }
+          },
+          {
+            "description": "This channel is closed.",
+            "type": "object",
+            "required": [
+              "state_flags",
+              "state_name"
+            ],
+            "properties": {
+              "state_flags": {
+                "type": "integer"
+              },
+              "state_name": {
+                "type": "string",
+                "enum": [
+                  "CLOSED"
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "ChannelUpdateInfo": {
+        "description": "The channel update info with a single direction of channel",
+        "type": "object",
+        "required": [
+          "enabled",
+          "fee_rate",
+          "timestamp",
+          "tlc_expiry_delta",
+          "tlc_minimum_value"
+        ],
+        "properties": {
+          "enabled": {
+            "description": "Whether the channel can be currently used for payments (in this one direction).",
+            "type": "boolean"
+          },
+          "fee_rate": {
+            "description": "The forwarding fee rate for the channel.",
+            "type": "string",
+            "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+          },
+          "outbound_liquidity": {
+            "description": "The exact amount of balance that we can send to the other party via the channel.",
+            "default": null,
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "timestamp": {
+            "description": "The timestamp is the time when the channel update was received by the node.",
+            "type": "string",
+            "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+          },
+          "tlc_expiry_delta": {
+            "description": "The difference in htlc expiry values that you must have when routing through this channel (in milliseconds).",
+            "type": "string",
+            "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+          },
+          "tlc_minimum_value": {
+            "description": "The minimum value, which must be relayed to the next hop via the channel",
+            "type": "string",
+            "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+          }
+        }
+      },
+      "CheckChannelShutdownParams": {
+        "type": "object",
+        "required": [
+          "channel_id"
+        ],
+        "properties": {
+          "channel_id": {
+            "description": "Channel ID",
+            "$ref": "#/components/schemas/Hash256"
+          }
+        }
+      },
+      "CkbInvoice": {
+        "description": "Represents a syntactically and semantically correct lightning BOLT11 invoice\n\nThere are three ways to construct a `CkbInvoice`:\n1. using [`CkbInvoiceBuilder`]\n2. using `str::parse::<CkbInvoice>(&str)` (see [`CkbInvoice::from_str`])",
+        "type": "object",
+        "required": [
+          "currency",
+          "data"
+        ],
+        "properties": {
+          "amount": {
+            "description": "The amount of the invoice",
+            "default": null,
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "currency": {
+            "description": "The currency of the invoice",
+            "$ref": "#/components/schemas/Currency"
+          },
+          "data": {
+            "description": "The invoice data, including the payment hash, timestamp and other attributes",
+            "$ref": "#/components/schemas/InvoiceData"
+          },
+          "signature": {
+            "description": "The signature of the invoice",
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/InvoiceSignature"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        }
+      },
+      "CkbInvoiceStatus": {
+        "description": "The currency of the invoice, can also used to represent the CKB network chain.",
+        "oneOf": [
+          {
+            "description": "The invoice is open and can be paid.",
+            "type": "string",
+            "enum": [
+              "Open"
+            ]
+          },
+          {
+            "description": "The invoice is cancelled.",
+            "type": "string",
+            "enum": [
+              "Cancelled"
+            ]
+          },
+          {
+            "description": "The invoice is expired.",
+            "type": "string",
+            "enum": [
+              "Expired"
+            ]
+          },
+          {
+            "description": "The invoice is received, but not settled yet.",
+            "type": "string",
+            "enum": [
+              "Received"
+            ]
+          },
+          {
+            "description": "The invoice is paid.",
+            "type": "string",
+            "enum": [
+              "Paid"
+            ]
+          }
+        ]
+      },
+      "CkbScript": {
+        "type": "string",
+        "pattern": "^0x([0-9a-fA-F]{2})*$"
+      },
+      "CommitmentSignedParams": {
+        "type": "object",
+        "required": [
+          "channel_id"
+        ],
+        "properties": {
+          "channel_id": {
+            "description": "The channel ID of the channel to send the commitment_signed message to",
+            "$ref": "#/components/schemas/Hash256"
+          }
+        }
+      },
+      "ConnectPeerParams": {
+        "type": "object",
+        "required": [
+          "address"
+        ],
+        "properties": {
+          "address": {
+            "description": "The address of the peer to connect to.",
+            "type": "string",
+            "format": "string"
+          },
+          "save": {
+            "description": "Whether to save the peer address to the peer store.",
+            "type": [
+              "boolean",
+              "null"
+            ]
+          }
+        }
+      },
+      "CreatePreimageParams": {
+        "type": "object",
+        "required": [
+          "payment_hash",
+          "preimage"
+        ],
+        "properties": {
+          "payment_hash": {
+            "description": "Payment hash",
+            "$ref": "#/components/schemas/Hash256"
+          },
+          "preimage": {
+            "description": "Preimage",
+            "$ref": "#/components/schemas/Hash256"
+          }
+        }
+      },
+      "CreateWatchChannelParams": {
+        "type": "object",
+        "required": [
+          "channel_id",
+          "local_funding_pubkey",
+          "local_settlement_key",
+          "remote_funding_pubkey",
+          "remote_settlement_key",
+          "settlement_data"
+        ],
+        "properties": {
+          "channel_id": {
+            "description": "Channel ID",
+            "$ref": "#/components/schemas/Hash256"
+          },
+          "funding_udt_type_script": {
+            "description": "Funding UDT type script",
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Script"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "local_funding_pubkey": {
+            "description": "The local party's funding public key",
+            "$ref": "#/components/schemas/Pubkey"
+          },
+          "local_settlement_key": {
+            "description": "The local party's private key used to settle the commitment transaction",
+            "$ref": "#/components/schemas/Privkey"
+          },
+          "remote_funding_pubkey": {
+            "description": "The remote party's funding public key",
+            "$ref": "#/components/schemas/Pubkey"
+          },
+          "remote_settlement_key": {
+            "description": "The remote party's public key used to settle the commitment transaction",
+            "$ref": "#/components/schemas/Pubkey"
+          },
+          "settlement_data": {
+            "description": "Settlement data",
+            "$ref": "#/components/schemas/SettlementData"
+          }
+        }
+      },
+      "Currency": {
+        "description": "The currency of the invoice, can also used to represent the CKB network chain.",
+        "oneOf": [
+          {
+            "description": "The mainnet currency of CKB.",
+            "type": "string",
+            "enum": [
+              "Fibb"
+            ]
+          },
+          {
+            "description": "The testnet currency of the CKB network.",
+            "type": "string",
+            "enum": [
+              "Fibt"
+            ]
+          },
+          {
+            "description": "The devnet currency of the CKB network.",
+            "type": "string",
+            "enum": [
+              "Fibd"
+            ]
+          }
+        ]
+      },
+      "DepType": {
+        "description": "The dep cell type. Allowed values: \"code\" and \"dep_group\".",
+        "oneOf": [
+          {
+            "description": "Type \"code\".\n\nUse the cell itself as the dep cell.",
+            "type": "string",
+            "enum": [
+              "code"
+            ]
+          },
+          {
+            "description": "Type \"dep_group\".\n\nThe cell is a dep group which members are cells. These members are used as dep cells instead of the group itself.\n\nThe dep group stores the array of `OutPoint`s serialized via molecule in the cell data. Each `OutPoint` points to one cell member.",
+            "type": "string",
+            "enum": [
+              "dep_group"
+            ]
+          }
+        ]
+      },
+      "DisconnectPeerParams": {
+        "type": "object",
+        "required": [
+          "peer_id"
+        ],
+        "properties": {
+          "peer_id": {
+            "description": "The peer ID of the peer to disconnect.",
+            "type": "string",
+            "format": "string"
+          }
+        }
+      },
+      "GetCchOrderParams": {
+        "type": "object",
+        "required": [
+          "payment_hash"
+        ],
+        "properties": {
+          "payment_hash": {
+            "description": "Payment hash for the HTLC for both CKB and BTC.",
+            "$ref": "#/components/schemas/Hash256"
+          }
+        }
+      },
+      "GetInvoiceResult": {
+        "description": "The status of the invoice.",
+        "type": "object",
+        "required": [
+          "invoice",
+          "invoice_address",
+          "status"
+        ],
+        "properties": {
+          "invoice": {
+            "description": "The invoice.",
+            "$ref": "#/components/schemas/CkbInvoice"
+          },
+          "invoice_address": {
+            "description": "The encoded invoice address.",
+            "type": "string"
+          },
+          "status": {
+            "description": "The invoice status",
+            "$ref": "#/components/schemas/CkbInvoiceStatus"
+          }
+        }
+      },
+      "GetPaymentCommandParams": {
+        "type": "object",
+        "required": [
+          "payment_hash"
+        ],
+        "properties": {
+          "payment_hash": {
+            "description": "The payment hash of the payment to retrieve",
+            "$ref": "#/components/schemas/Hash256"
+          }
+        }
+      },
+      "GetPaymentCommandResult": {
+        "type": "object",
+        "required": [
+          "created_at",
+          "fee",
+          "last_updated_at",
+          "payment_hash",
+          "routers",
+          "status"
+        ],
+        "properties": {
+          "created_at": {
+            "description": "The time the payment was created at, in milliseconds from UNIX epoch",
+            "type": "string",
+            "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+          },
+          "custom_records": {
+            "description": "The custom records to be included in the payment.",
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PaymentCustomRecords"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "failed_error": {
+            "description": "The error message if the payment failed",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "fee": {
+            "description": "fee paid for the payment",
+            "type": "string",
+            "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+          },
+          "last_updated_at": {
+            "description": "The time the payment was last updated at, in milliseconds from UNIX epoch",
+            "type": "string",
+            "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+          },
+          "payment_hash": {
+            "description": "The payment hash of the payment",
+            "$ref": "#/components/schemas/Hash256"
+          },
+          "routers": {
+            "description": "The router is a list of nodes that the payment will go through. We store in the payment session and then will use it to track the payment history. The router is a list of nodes that the payment will go through. If the payment adapted MPP (multi-part payment), the routers will be a list of nodes For example: `A(amount, channel) -> B -> C -> D` means A will send `amount` with `channel` to B.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SessionRoute"
+            }
+          },
+          "status": {
+            "description": "The status of the payment",
+            "$ref": "#/components/schemas/PaymentStatus"
+          }
+        }
+      },
+      "GraphChannelsParams": {
+        "type": "object",
+        "properties": {
+          "after": {
+            "description": "The cursor to start returning channels from.",
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/JsonBytes"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "limit": {
+            "description": "The maximum number of channels to return.",
+            "default": null,
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        }
+      },
+      "GraphChannelsResult": {
+        "type": "object",
+        "required": [
+          "channels",
+          "last_cursor"
+        ],
+        "properties": {
+          "channels": {
+            "description": "A list of channels.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ChannelInfo"
+            }
+          },
+          "last_cursor": {
+            "description": "The last cursor for pagination.",
+            "$ref": "#/components/schemas/JsonBytes"
+          }
+        }
+      },
+      "GraphNodesParams": {
+        "type": "object",
+        "properties": {
+          "after": {
+            "description": "The cursor to start returning nodes from.",
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/JsonBytes"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "limit": {
+            "description": "The maximum number of nodes to return.",
+            "default": null,
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        }
+      },
+      "GraphNodesResult": {
+        "type": "object",
+        "required": [
+          "last_cursor",
+          "nodes"
+        ],
+        "properties": {
+          "last_cursor": {
+            "description": "The last cursor.",
+            "$ref": "#/components/schemas/JsonBytes"
+          },
+          "nodes": {
+            "description": "The list of nodes.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NodeInfo"
+            }
+          }
+        }
+      },
+      "H256": {
+        "description": "The 32-byte fixed-length binary data.\n\nThe name comes from the number of bits in the data.\n\nIn JSONRPC, it is encoded as a 0x-prefixed hex string.",
+        "type": "array",
+        "items": {
+          "type": "integer",
+          "format": "uint8",
+          "minimum": 0.0
+        },
+        "maxItems": 32,
+        "minItems": 32
+      },
+      "Hash256": {
+        "description": "A 256-bit hash digest, used as identifier of channel, payment, transaction hash etc.",
+        "type": "string",
+        "pattern": "^0x([0-9a-fA-F]{2})*$"
+      },
+      "HashAlgorithm": {
+        "description": "HashAlgorithm is the hash algorithm used in the hash lock.",
+        "oneOf": [
+          {
+            "description": "The default hash algorithm, CkbHash",
+            "type": "string",
+            "enum": [
+              "ckb_hash"
+            ]
+          },
+          {
+            "description": "The sha256 hash algorithm",
+            "type": "string",
+            "enum": [
+              "sha256"
+            ]
+          }
+        ]
+      },
+      "HopHint": {
+        "description": "A hop hint is a hint for a node to use a specific channel.",
+        "type": "object",
+        "required": [
+          "channel_outpoint",
+          "fee_rate",
+          "pubkey",
+          "tlc_expiry_delta"
+        ],
+        "properties": {
+          "channel_outpoint": {
+            "description": "The outpoint of the channel",
+            "type": "string",
+            "pattern": "^0x([0-9a-fA-F]{2})*$"
+          },
+          "fee_rate": {
+            "description": "The fee rate to use this hop to forward the payment.",
+            "type": "string",
+            "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+          },
+          "pubkey": {
+            "description": "The public key of the node",
+            "$ref": "#/components/schemas/Pubkey"
+          },
+          "tlc_expiry_delta": {
+            "description": "The TLC expiry delta to use this hop to forward the payment.",
+            "type": "string",
+            "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+          }
+        }
+      },
+      "HopRequire": {
+        "description": "A hop requirement need to meet when building router, do not including the source node, the last hop is the target node.",
+        "type": "object",
+        "required": [
+          "pubkey"
+        ],
+        "properties": {
+          "channel_outpoint": {
+            "description": "The outpoint for the channel, which means use channel with `channel_outpoint` to reach this node",
+            "default": null,
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^0x([0-9a-fA-F]{2})*$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "pubkey": {
+            "description": "The public key of the node",
+            "$ref": "#/components/schemas/Pubkey"
+          }
+        }
+      },
+      "Htlc": {
+        "description": "The htlc data structure",
+        "type": "object",
+        "required": [
+          "amount",
+          "expiry",
+          "id",
+          "payment_hash",
+          "status"
+        ],
+        "properties": {
+          "amount": {
+            "description": "The amount of the htlc",
+            "type": "string",
+            "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+          },
+          "expiry": {
+            "description": "The expiry of the htlc",
+            "type": "string",
+            "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+          },
+          "forwarding_channel_id": {
+            "description": "If this HTLC is involved in a forwarding operation, this field indicates the forwarding channel. For an outbound htlc, it is the inbound channel. For an inbound htlc, it is the outbound channel.",
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Hash256"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "forwarding_tlc_id": {
+            "description": "If this HTLC is involved in a forwarding operation, this field indicates the forwarding tlc id.",
+            "default": null,
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "id": {
+            "description": "The id of the htlc",
+            "type": "string",
+            "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+          },
+          "payment_hash": {
+            "description": "The payment hash of the htlc",
+            "$ref": "#/components/schemas/Hash256"
+          },
+          "status": {
+            "description": "The status of the htlc",
+            "$ref": "#/components/schemas/TlcStatus"
+          }
+        }
+      },
+      "InboundTlcStatus": {
+        "description": "The status of an inbound tlc",
+        "type": "string",
+        "enum": [
+          "RemoteAnnounced",
+          "AnnounceWaitPrevAck",
+          "AnnounceWaitAck",
+          "Committed",
+          "LocalRemoved",
+          "RemoveAckConfirmed"
+        ]
+      },
+      "InvoiceData": {
+        "description": "The metadata of the invoice",
+        "type": "object",
+        "required": [
+          "attrs",
+          "payment_hash",
+          "timestamp"
+        ],
+        "properties": {
+          "attrs": {
+            "description": "The attributes of the invoice, e.g. description, expiry time, etc.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Attribute"
+            }
+          },
+          "payment_hash": {
+            "description": "The payment hash of the invoice",
+            "$ref": "#/components/schemas/Hash256"
+          },
+          "timestamp": {
+            "description": "The timestamp of the invoice",
+            "type": "string",
+            "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+          }
+        }
+      },
+      "InvoiceParams": {
+        "type": "object",
+        "required": [
+          "payment_hash"
+        ],
+        "properties": {
+          "payment_hash": {
+            "description": "The payment hash of the invoice.",
+            "$ref": "#/components/schemas/Hash256"
+          }
+        }
+      },
+      "InvoiceResult": {
+        "type": "object",
+        "required": [
+          "invoice",
+          "invoice_address"
+        ],
+        "properties": {
+          "invoice": {
+            "description": "The invoice.",
+            "$ref": "#/components/schemas/CkbInvoice"
+          },
+          "invoice_address": {
+            "description": "The encoded invoice address.",
+            "type": "string"
+          }
+        }
+      },
+      "InvoiceSignature": {
+        "description": "Recoverable signature",
+        "type": "string",
+        "pattern": "^([0-9a-fA-F]{2})*$"
+      },
+      "JsonBytes": {
+        "type": "string"
+      },
+      "ListChannelsParams": {
+        "type": "object",
+        "properties": {
+          "include_closed": {
+            "description": "Whether to include closed channels in the list, an optional parameter, default value is false",
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "only_pending": {
+            "description": "When set to true, only return channels that are still being opened (non-final states: negotiating, collaborating on funding tx, signing, awaiting tx signatures, awaiting channel ready) as well as channels whose opening attempt failed. Default is false. Mutually exclusive with `include_closed`.",
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "peer_id": {
+            "description": "The peer ID to list channels for, an optional parameter, if not provided, all channels will be listed",
+            "default": null,
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        }
+      },
+      "ListChannelsResult": {
+        "type": "object",
+        "required": [
+          "channels"
+        ],
+        "properties": {
+          "channels": {
+            "description": "The list of channels",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Channel"
+            }
+          }
+        }
+      },
+      "ListPeersResult": {
+        "description": "The result of the `list_peers` RPC method.",
+        "type": "object",
+        "required": [
+          "peers"
+        ],
+        "properties": {
+          "peers": {
+            "description": "A list of connected peers.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PeerInfo"
+            }
+          }
+        }
+      },
+      "NewInvoiceParams": {
+        "description": "The parameter struct for generating a new invoice.",
+        "type": "object",
+        "required": [
+          "amount",
+          "currency"
+        ],
+        "properties": {
+          "allow_mpp": {
+            "description": "Whether allow payment to use MPP",
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "allow_trampoline_routing": {
+            "description": "Whether allow payment to use trampoline routing",
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "amount": {
+            "description": "The amount of the invoice.",
+            "type": "string",
+            "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+          },
+          "currency": {
+            "description": "The currency of the invoice.",
+            "$ref": "#/components/schemas/Currency"
+          },
+          "description": {
+            "description": "The description of the invoice.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "expiry": {
+            "description": "The expiry time of the invoice, in seconds.",
+            "default": null,
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "fallback_address": {
+            "description": "The fallback address of the invoice.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "final_expiry_delta": {
+            "description": "The final HTLC timeout of the invoice, in milliseconds. Minimal value is 16 hours, and maximal value is 14 days.",
+            "default": null,
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "hash_algorithm": {
+            "description": "The hash algorithm of the invoice.",
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/HashAlgorithm"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "payment_hash": {
+            "description": "The hash of the preimage. If hash is set, preimage must be absent. This condition indicates a 'hold invoice' for which the tlc must be accepted and held until the preimage becomes known.",
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Hash256"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "payment_preimage": {
+            "description": "The preimage to settle an incoming TLC payable to this invoice. If preimage is set, hash must be absent. If both preimage and hash are absent, a random preimage is generated.",
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Hash256"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "udt_type_script": {
+            "description": "The UDT type script of the invoice.",
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Script"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        }
+      },
+      "NodeInfo": {
+        "description": "The Node information.",
+        "type": "object",
+        "required": [
+          "addresses",
+          "auto_accept_min_ckb_funding_amount",
+          "chain_hash",
+          "features",
+          "node_id",
+          "node_name",
+          "timestamp",
+          "udt_cfg_infos",
+          "version"
+        ],
+        "properties": {
+          "addresses": {
+            "description": "The addresses of the node.",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "string"
+            }
+          },
+          "auto_accept_min_ckb_funding_amount": {
+            "description": "The minimum CKB funding amount for automatically accepting open channel requests.",
+            "type": "string",
+            "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+          },
+          "chain_hash": {
+            "description": "The chain hash of the node.",
+            "$ref": "#/components/schemas/Hash256"
+          },
+          "features": {
+            "description": "The node features supported by the node.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "node_id": {
+            "description": "The identity public key of the node.",
+            "$ref": "#/components/schemas/Pubkey"
+          },
+          "node_name": {
+            "description": "The name of the node.",
+            "type": "string"
+          },
+          "timestamp": {
+            "description": "The latest timestamp set by the owner for the node announcement. When a Node is online this timestamp will be updated to the latest value.",
+            "type": "string",
+            "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+          },
+          "udt_cfg_infos": {
+            "description": "The UDT configuration infos of the node.",
+            "$ref": "#/components/schemas/UdtCfgInfos"
+          },
+          "version": {
+            "description": "The version of the node.",
+            "type": "string"
+          }
+        }
+      },
+      "NodeInfoResult": {
+        "type": "object",
+        "required": [
+          "addresses",
+          "auto_accept_channel_ckb_funding_amount",
+          "chain_hash",
+          "channel_count",
+          "commit_hash",
+          "default_funding_lock_script",
+          "features",
+          "node_id",
+          "open_channel_auto_accept_min_ckb_funding_amount",
+          "peers_count",
+          "pending_channel_count",
+          "tlc_expiry_delta",
+          "tlc_fee_proportional_millionths",
+          "tlc_min_value",
+          "udt_cfg_infos",
+          "version"
+        ],
+        "properties": {
+          "addresses": {
+            "description": "A list of multi-addresses associated with the node.",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "string"
+            }
+          },
+          "auto_accept_channel_ckb_funding_amount": {
+            "description": "The CKB funding amount for automatically accepting channel requests, serialized as a hexadecimal string.",
+            "type": "string",
+            "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+          },
+          "chain_hash": {
+            "description": "The hash of the blockchain that the node is connected to.",
+            "$ref": "#/components/schemas/Hash256"
+          },
+          "channel_count": {
+            "description": "The number of channels associated with the node, serialized as a hexadecimal string.",
+            "type": "string",
+            "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+          },
+          "commit_hash": {
+            "description": "The commit hash of the node software.",
+            "type": "string"
+          },
+          "default_funding_lock_script": {
+            "description": "The default funding lock script for the node.",
+            "$ref": "#/components/schemas/Script"
+          },
+          "features": {
+            "description": "The features supported by the node.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "node_id": {
+            "description": "The identity public key of the node.",
+            "$ref": "#/components/schemas/Pubkey"
+          },
+          "node_name": {
+            "description": "The optional name of the node.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "open_channel_auto_accept_min_ckb_funding_amount": {
+            "description": "The minimum CKB funding amount for automatically accepting open channel requests, serialized as a hexadecimal string.",
+            "type": "string",
+            "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+          },
+          "peers_count": {
+            "description": "The number of peers connected to the node, serialized as a hexadecimal string.",
+            "type": "string",
+            "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+          },
+          "pending_channel_count": {
+            "description": "The number of pending channels associated with the node, serialized as a hexadecimal string.",
+            "type": "string",
+            "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+          },
+          "tlc_expiry_delta": {
+            "description": "The locktime expiry delta for Time-Locked Contracts (TLC), serialized as a hexadecimal string.",
+            "type": "string",
+            "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+          },
+          "tlc_fee_proportional_millionths": {
+            "description": "The fee (to forward payments) proportional to the value of Time-Locked Contracts (TLC), expressed in millionths and serialized as a hexadecimal string.",
+            "type": "string",
+            "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+          },
+          "tlc_min_value": {
+            "description": "The minimum value for Time-Locked Contracts (TLC) we can send, serialized as a hexadecimal string.",
+            "type": "string",
+            "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+          },
+          "udt_cfg_infos": {
+            "description": "Configuration information for User-Defined Tokens (UDT) associated with the node.",
+            "$ref": "#/components/schemas/UdtCfgInfos"
+          },
+          "version": {
+            "description": "The version of the node software.",
+            "type": "string"
+          }
+        }
+      },
+      "OpenChannelParams": {
+        "type": "object",
+        "required": [
+          "funding_amount",
+          "peer_id"
+        ],
+        "properties": {
+          "commitment_delay_epoch": {
+            "description": "The delay time for the commitment transaction, must be an [EpochNumberWithFraction](https://github.com/nervosnetwork/rfcs/blob/master/rfcs/0017-tx-valid-since/e-i-l-encoding.png) in u64 format, an optional parameter, default value is 1 epoch, which is 4 hours.",
+            "default": null,
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "commitment_fee_rate": {
+            "description": "The fee rate for the commitment transaction, an optional parameter.",
+            "default": null,
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "funding_amount": {
+            "description": "The amount of CKB or UDT to fund the channel with.",
+            "type": "string",
+            "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+          },
+          "funding_fee_rate": {
+            "description": "The fee rate for the funding transaction, an optional parameter.",
+            "default": null,
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "funding_udt_type_script": {
+            "description": "The type script of the UDT to fund the channel with, an optional parameter.",
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Script"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "max_tlc_number_in_flight": {
+            "description": "The maximum number of TLCs that can be accepted, an optional parameter, default is 125 This parameter can not be updated after channel is opened.",
+            "default": null,
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "max_tlc_value_in_flight": {
+            "description": "The maximum value in flight for TLCs, an optional parameter. This parameter can not be updated after channel is opened.",
+            "default": null,
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "one_way": {
+            "description": "Whether this is a one-way channel (will not be broadcasted to network, and can only be used to send payment one way), an optional parameter, default value is false.",
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "peer_id": {
+            "description": "The peer ID to open a channel with, the peer must be connected through the [connect_peer](#peer-connect_peer) rpc first.",
+            "type": "string",
+            "format": "string"
+          },
+          "public": {
+            "description": "Whether this is a public channel (will be broadcasted to network, and can be used to forward TLCs), an optional parameter, default value is true.",
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "shutdown_script": {
+            "description": "The script used to receive the channel balance, an optional parameter, default value is the secp256k1_blake160_sighash_all script corresponding to the configured private key.",
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Script"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tlc_expiry_delta": {
+            "description": "The expiry delta to forward a tlc, in milliseconds, default to 4 hours, which is 4 * 60 * 60 * 1000 milliseconds Expect it >= 2/3 commitment_delay_epoch. This parameter can be updated with rpc `update_channel` later.",
+            "default": null,
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tlc_fee_proportional_millionths": {
+            "description": "The fee proportional millionths for a TLC, proportional to the amount of the forwarded tlc. The unit is millionths of the amount. default is 1000 which means 0.1%. This parameter can be updated with rpc `update_channel` later. Not that, we use outbound channel to calculate the fee for TLC forwarding. For example, if we have a path A -> B -> C, then the fee B requires for TLC forwarding, is calculated the channel configuration of B and C, not A and B.",
+            "default": null,
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tlc_min_value": {
+            "description": "The minimum value for a TLC our side can send, an optional parameter, default is 0, which means we can send any TLC is larger than 0. This parameter can be updated with rpc `update_channel` later.",
+            "default": null,
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        }
+      },
+      "OpenChannelResult": {
+        "type": "object",
+        "required": [
+          "temporary_channel_id"
+        ],
+        "properties": {
+          "temporary_channel_id": {
+            "description": "The temporary channel ID of the channel being opened",
+            "$ref": "#/components/schemas/Hash256"
+          }
+        }
+      },
+      "OutPoint": {
+        "description": "Reference to a cell via transaction hash and output index.\n\n## Examples\n\n```\n # serde_json::from_str::<ckb_jsonrpc_types::OutPoint>(r#\"\n {\n   \"index\": \"0x0\",\n   \"tx_hash\": \"0x365698b50ca0da75dca2c87f9e7b563811d3b5813736b8cc62cc3b106faceb17\"\n }\n # \"#).unwrap();\n```",
+        "type": "object",
+        "required": [
+          "index",
+          "tx_hash"
+        ],
+        "properties": {
+          "index": {
+            "description": "The output index of the cell in the transaction specified by `tx_hash`.",
+            "$ref": "#/components/schemas/Uint32"
+          },
+          "tx_hash": {
+            "description": "Transaction hash in which the cell is an output.",
+            "$ref": "#/components/schemas/H256"
+          }
+        },
+        "additionalProperties": false
+      },
+      "OutboundTlcStatus": {
+        "description": "The status of an outbound tlc",
+        "type": "string",
+        "enum": [
+          "LocalAnnounced",
+          "Committed",
+          "RemoteRemoved",
+          "RemoveWaitPrevAck",
+          "RemoveWaitAck",
+          "RemoveAckConfirmed"
+        ]
+      },
+      "ParseInvoiceParams": {
+        "type": "object",
+        "required": [
+          "invoice"
+        ],
+        "properties": {
+          "invoice": {
+            "description": "The encoded invoice address.",
+            "type": "string"
+          }
+        }
+      },
+      "ParseInvoiceResult": {
+        "type": "object",
+        "required": [
+          "invoice"
+        ],
+        "properties": {
+          "invoice": {
+            "description": "The invoice.",
+            "$ref": "#/components/schemas/CkbInvoice"
+          }
+        }
+      },
+      "PaymentCustomRecords": {
+        "description": "Custom records map. Keys are hex-encoded u32 (0~65535), values are hex-encoded bytes. Both prefixed with 0x.",
+        "type": "object",
+        "additionalProperties": {
+          "type": "string",
+          "pattern": "^0x([0-9a-fA-F]{2})*$"
+        },
+        "propertyNames": {
+          "type": "string",
+          "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]{0,3})$"
+        }
+      },
+      "PaymentStatus": {
+        "description": "The status of a payment, will update as the payment progresses. The transfer path for payment status is `Created -> Inflight -> Success | Failed`.\n\n**MPP Behavior**: A single session may involve multiple attempts (HTLCs) to fulfill the total amount.",
+        "oneOf": [
+          {
+            "description": "Initial status. A payment session is created, but no HTLC has been dispatched.",
+            "type": "string",
+            "enum": [
+              "Created"
+            ]
+          },
+          {
+            "description": "The first hop AddTlc is sent successfully and waiting for the response.\n\n> **MPP Logic**: Status `Inflight` means at least one attempt is still not in `Success`, payment needs more retrying or waiting for HTLC settlement.",
+            "type": "string",
+            "enum": [
+              "Inflight"
+            ]
+          },
+          {
+            "description": "The payment is finished. All related HTLCs are successfully settled, and the aggregate amount equals the total requested amount.",
+            "type": "string",
+            "enum": [
+              "Success"
+            ]
+          },
+          {
+            "description": "The payment session has terminated. HTLCs have failed and the target amount cannot be fulfilled after exhausting all retries.",
+            "type": "string",
+            "enum": [
+              "Failed"
+            ]
+          }
+        ]
+      },
+      "PeerInfo": {
+        "description": "The information about a peer connected to the node.",
+        "type": "object",
+        "required": [
+          "address",
+          "peer_id",
+          "pubkey"
+        ],
+        "properties": {
+          "address": {
+            "description": "The multi-address associated with the connecting peer. Note: this is only the address which used for connecting to the peer, not all addresses of the peer. The `graph_nodes` in Graph rpc module will return all addresses of the peer.",
+            "type": "string",
+            "format": "string"
+          },
+          "peer_id": {
+            "description": "The peer ID of the peer",
+            "type": "string",
+            "format": "string"
+          },
+          "pubkey": {
+            "description": "The identity public key of the peer.",
+            "$ref": "#/components/schemas/Pubkey"
+          }
+        }
+      },
+      "Privkey": {
+        "description": "A wrapper for secp256k1 secret key",
+        "type": "string",
+        "format": "any"
+      },
+      "Pubkey": {
+        "description": "The public key for a Node It stores the serialized form ([u8; 33]) directly for fast comparison and hashing",
+        "type": "string",
+        "pattern": "^([0-9a-fA-F]{2})*$"
+      },
+      "ReceiveBTCParams": {
+        "type": "object",
+        "required": [
+          "fiber_pay_req"
+        ],
+        "properties": {
+          "fiber_pay_req": {
+            "description": "Payment request string for the CKB Fiber payee.\n\nThe invoice should not be expired soon. The remaining expiry time should be greater than the CCH config `min_incoming_invoice_expiry_delta_seconds`.",
+            "type": "string"
+          }
+        }
+      },
+      "RemovePreimageParams": {
+        "type": "object",
+        "required": [
+          "payment_hash"
+        ],
+        "properties": {
+          "payment_hash": {
+            "description": "Payment hash",
+            "$ref": "#/components/schemas/Hash256"
+          }
+        }
+      },
+      "RemoveTlcParams": {
+        "type": "object",
+        "required": [
+          "channel_id",
+          "reason",
+          "tlc_id"
+        ],
+        "properties": {
+          "channel_id": {
+            "description": "The channel ID of the channel to remove the TLC from",
+            "$ref": "#/components/schemas/Hash256"
+          },
+          "reason": {
+            "description": "The reason for removing the TLC, either a 32-byte hash for preimage fulfillment or an u32 error code for removal",
+            "$ref": "#/components/schemas/RemoveTlcReason"
+          },
+          "tlc_id": {
+            "description": "The ID of the TLC to remove",
+            "type": "string",
+            "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+          }
+        }
+      },
+      "RemoveTlcReason": {
+        "description": "The reason for removing a TLC",
+        "anyOf": [
+          {
+            "description": "The reason for removing the TLC is that it was fulfilled",
+            "type": "object",
+            "required": [
+              "payment_preimage"
+            ],
+            "properties": {
+              "payment_preimage": {
+                "$ref": "#/components/schemas/Hash256"
+              }
+            }
+          },
+          {
+            "description": "The reason for removing the TLC is that it failed",
+            "type": "object",
+            "required": [
+              "error_code"
+            ],
+            "properties": {
+              "error_code": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "RemoveWatchChannelParams": {
+        "type": "object",
+        "required": [
+          "channel_id"
+        ],
+        "properties": {
+          "channel_id": {
+            "description": "Channel ID",
+            "$ref": "#/components/schemas/Hash256"
+          }
+        }
+      },
+      "RevocationData": {
+        "description": "Data needed to revoke an outdated commitment transaction.",
+        "type": "object",
+        "required": [
+          "aggregated_signature",
+          "commitment_number",
+          "output",
+          "output_data"
+        ],
+        "properties": {
+          "aggregated_signature": {
+            "description": "The aggregated signature from both parties that authorizes the revocation",
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "maximum": 255.0,
+              "minimum": 0.0
+            }
+          },
+          "commitment_number": {
+            "description": "The commitment transaction version number that was revoked",
+            "type": "integer",
+            "format": "uint64",
+            "minimum": 0.0
+          },
+          "output": {
+            "description": "The output cell from the revoked commitment transaction",
+            "type": "string",
+            "pattern": "^0x([0-9a-fA-F]{2})*$"
+          },
+          "output_data": {
+            "description": "The associated data for the output cell (e.g., UDT amount for token transfers)",
+            "type": "string",
+            "pattern": "^0x([0-9a-fA-F]{2})*$"
+          }
+        }
+      },
+      "RouterHop": {
+        "description": "A router hop information for a payment, a paymenter router is an array of RouterHop, a router hop generally implies hop `target` will receive `amount_received` with `channel_outpoint` of channel. Improper hop hint may make payment fail, for example the specified channel do not have enough capacity.",
+        "type": "object",
+        "required": [
+          "amount_received",
+          "channel_outpoint",
+          "incoming_tlc_expiry",
+          "target"
+        ],
+        "properties": {
+          "amount_received": {
+            "description": "The amount that the source node will transfer to the target node. We have already added up all the fees along the path, so this amount can be used directly for the TLC.",
+            "type": "string",
+            "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+          },
+          "channel_outpoint": {
+            "description": "The channel of this hop used to receive TLC",
+            "type": "string",
+            "pattern": "^0x([0-9a-fA-F]{2})*$"
+          },
+          "incoming_tlc_expiry": {
+            "description": "The expiry for the TLC that the source node sends to the target node. We have already added up all the expiry deltas along the path, the only thing missing is current time. So the expiry is the current time plus the expiry delta.",
+            "type": "string",
+            "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+          },
+          "target": {
+            "description": "The node that is sending the TLC to the next node.",
+            "$ref": "#/components/schemas/Pubkey"
+          }
+        }
+      },
+      "RpcContext": {
+        "type": "object",
+        "required": [
+          "node_id"
+        ],
+        "properties": {
+          "node_id": {
+            "description": "Node ID, read from user RPC biscuit token",
+            "type": "string",
+            "format": "string"
+          }
+        }
+      },
+      "Script": {
+        "description": "Describes the lock script and type script for a cell.\n\n## Examples\n\n```\n # serde_json::from_str::<ckb_jsonrpc_types::Script>(r#\"\n {\n   \"code_hash\": \"0x28e83a1277d48add8e72fadaa9248559e1b632bab2bd60b27955ebc4c03800a5\",\n   \"hash_type\": \"data\",\n   \"args\": \"0x\"\n }\n # \"#).unwrap();\n```",
+        "type": "object",
+        "required": [
+          "args",
+          "code_hash",
+          "hash_type"
+        ],
+        "properties": {
+          "args": {
+            "description": "Arguments for script.",
+            "$ref": "#/components/schemas/JsonBytes"
+          },
+          "code_hash": {
+            "description": "The hash used to match the script code.",
+            "$ref": "#/components/schemas/H256"
+          },
+          "hash_type": {
+            "description": "Specifies how to use the `code_hash` to match the script code.",
+            "$ref": "#/components/schemas/ScriptHashType"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ScriptHashType": {
+        "description": "Specifies how the script `code_hash` is used to match the script code and how to run the code.\n\nAllowed kinds: \"data\", \"type\", \"data1\" and \"data2\"\n\nRefer to the section [Code Locating](https://github.com/nervosnetwork/rfcs/blob/master/rfcs/0022-transaction-structure/0022-transaction-structure.md#code-locating) and [Upgradable Script](https://github.com/nervosnetwork/rfcs/blob/master/rfcs/0022-transaction-structure/0022-transaction-structure.md#upgradable-script) in the RFC *CKB Transaction Structure*.\n\nThe hash type is split into the high 7 bits and the low 1 bit, when the low 1 bit is 1, it indicates the type, when the low 1 bit is 0, it indicates the data, and then it relies on the high 7 bits to indicate that the data actually corresponds to the version.",
+        "oneOf": [
+          {
+            "description": "Type \"data\" matches script code via cell data hash, and run the script code in v0 CKB VM.",
+            "type": "string",
+            "enum": [
+              "data"
+            ]
+          },
+          {
+            "description": "Type \"type\" matches script code via cell type script hash.",
+            "type": "string",
+            "enum": [
+              "type"
+            ]
+          },
+          {
+            "description": "Type \"data1\" matches script code via cell data hash, and run the script code in v1 CKB VM.",
+            "type": "string",
+            "enum": [
+              "data1"
+            ]
+          },
+          {
+            "description": "Type \"data2\" matches script code via cell data hash, and run the script code in v2 CKB VM.",
+            "type": "string",
+            "enum": [
+              "data2"
+            ]
+          }
+        ]
+      },
+      "SendBTCParams": {
+        "type": "object",
+        "required": [
+          "btc_pay_req",
+          "currency"
+        ],
+        "properties": {
+          "btc_pay_req": {
+            "description": "Payment request string for the BTC Lightning payee.\n\nThe invoice should not be expired soon. The remaining expiry time should be greater than the CCH config `min_incoming_invoice_expiry_delta_seconds`.",
+            "type": "string"
+          },
+          "currency": {
+            "description": "Request currency",
+            "$ref": "#/components/schemas/Currency"
+          }
+        }
+      },
+      "SendPaymentCommandParams": {
+        "type": "object",
+        "properties": {
+          "allow_self_payment": {
+            "description": "allow self payment, default is false",
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "amount": {
+            "description": "the amount of the payment, the unit is Shannons for non UDT payment If not set and there is a invoice, the amount will be set to the invoice amount",
+            "default": null,
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "custom_records": {
+            "description": "Some custom records for the payment which contains a map of u32 to Vec<u8> The key is the record type, and the value is the serialized data For example:\n ```json\n \"custom_records\": {\n    \"0x1\": \"0x01020304\",\n    \"0x2\": \"0x05060708\",\n    \"0x3\": \"0x090a0b0c\",\n    \"0x4\": \"0x0d0e0f10010d090a0b0c\"\n  }\n```",
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PaymentCustomRecords"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "dry_run": {
+            "description": "dry_run for payment, used for check whether we can build valid router and the fee for this payment, it's useful for the sender to double check the payment before sending it to the network, default is false",
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "final_tlc_expiry_delta": {
+            "description": "the TLC expiry delta should be used to set the timelock for the final hop, in milliseconds",
+            "default": null,
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "hop_hints": {
+            "description": "Optional route hints to reach the destination through private channels. Note:\n1. this is only used for the private channels with the last hop.\n2. `hop_hints` is only a `hint` for routing algorithm, it is not a guarantee that the payment will be routed through the specified channels, it is up to the routing algorithm to decide whether to use the hints or not.\n\nFor example `(pubkey, channel_outpoint, fee_rate, tlc_expiry_delta)` suggest path router to use the channel of `channel_outpoint` at hop with `pubkey` to forward the payment and the fee rate is `fee_rate` and tlc_expiry_delta is `tlc_expiry_delta`.",
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/HopHint"
+            }
+          },
+          "invoice": {
+            "description": "the encoded invoice to send to the recipient",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "keysend": {
+            "description": "keysend payment",
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "max_fee_amount": {
+            "description": "the maximum fee amounts in shannons that the sender is willing to pay. Note: In trampoline routing mode, the sender will use the max_fee_amount as the total fee as much as possible.",
+            "default": null,
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "max_fee_rate": {
+            "description": "the maximum fee rate per thousand (‰), default is 5 (0.5%)",
+            "default": null,
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "max_parts": {
+            "description": "max parts for the payment, only used for multi-part payments",
+            "default": null,
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "payment_hash": {
+            "description": "the hash to use within the payment's HTLC. If not set and `keysend` is set to true, a random hash will be generated. If not set and there is a `payment_hash` in the invoice, it will be used. Otherwise, `payment_hash` need to be set.",
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Hash256"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "target_pubkey": {
+            "description": "the identifier of the payment target",
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Pubkey"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "timeout": {
+            "description": "the payment timeout in seconds, if the payment is not completed within this time, it will be cancelled",
+            "default": null,
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tlc_expiry_limit": {
+            "description": "the TLC expiry limit for the whole payment, in milliseconds, each hop is with a default tlc delta of 1 day suppose the payment router is with N hops, the total tlc expiry limit is at least (N-1) days this is also the default value for the payment if this parameter is not provided",
+            "default": null,
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "trampoline_hops": {
+            "description": "Optional explicit trampoline hops.\n\nWhen set to a non-empty list `[t1, t2, ...]`, routing will only find a path from the payer to `t1`, and the inner trampoline onion will encode `t1 -> t2 -> ... -> final`.",
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/Pubkey"
+            }
+          },
+          "udt_type_script": {
+            "description": "udt type script for the payment",
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Script"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        }
+      },
+      "SendPaymentWithRouterParams": {
+        "type": "object",
+        "required": [
+          "router"
+        ],
+        "properties": {
+          "custom_records": {
+            "description": "Some custom records for the payment which contains a map of u32 to Vec<u8> The key is the record type, and the value is the serialized data. Limits: the sum size of values can not exceed 2048 bytes.\n\nFor example:\n ```json\n \"custom_records\": {\n    \"0x1\": \"0x01020304\",\n    \"0x2\": \"0x05060708\",\n    \"0x3\": \"0x090a0b0c\",\n    \"0x4\": \"0x0d0e0f10010d090a0b0c\"\n  }\n```",
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PaymentCustomRecords"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "dry_run": {
+            "description": "dry_run for payment, used for check whether we can build valid router and the fee for this payment, it's useful for the sender to double check the payment before sending it to the network, default is false",
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "invoice": {
+            "description": "the encoded invoice to send to the recipient",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "keysend": {
+            "description": "keysend payment",
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "payment_hash": {
+            "description": "the hash to use within the payment's HTLC. If not set and `keysend` is set to true, a random hash will be generated. If not set and there is a `payment_hash` in the invoice, it will be used. Otherwise, `payment_hash` need to be set.",
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Hash256"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "router": {
+            "description": "The router to use for the payment",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RouterHop"
+            }
+          },
+          "udt_type_script": {
+            "description": "udt type script for the payment",
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Script"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        }
+      },
+      "SessionRoute": {
+        "description": "The router is a list of nodes that the payment will go through. We store in the payment session and then will use it to track the payment history. The router is a list of nodes that the payment will go through. For example: `A(amount, channel) -> B -> C -> D` means A will send `amount` with `channel` to B.",
+        "type": "object",
+        "required": [
+          "nodes"
+        ],
+        "properties": {
+          "nodes": {
+            "description": "the nodes in the route",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SessionRouteNode"
+            }
+          }
+        }
+      },
+      "SessionRouteNode": {
+        "description": "The node and channel information in a payment route hop",
+        "type": "object",
+        "required": [
+          "amount",
+          "channel_outpoint",
+          "pubkey"
+        ],
+        "properties": {
+          "amount": {
+            "description": "the amount for this hop",
+            "type": "string",
+            "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+          },
+          "channel_outpoint": {
+            "description": "the channel outpoint for this hop",
+            "type": "string",
+            "pattern": "^0x([0-9a-fA-F]{2})*$"
+          },
+          "pubkey": {
+            "description": "the public key of the node",
+            "$ref": "#/components/schemas/Pubkey"
+          }
+        }
+      },
+      "SettleInvoiceParams": {
+        "type": "object",
+        "required": [
+          "payment_hash",
+          "payment_preimage"
+        ],
+        "properties": {
+          "payment_hash": {
+            "description": "The payment hash of the invoice.",
+            "$ref": "#/components/schemas/Hash256"
+          },
+          "payment_preimage": {
+            "description": "The payment preimage of the invoice.",
+            "$ref": "#/components/schemas/Hash256"
+          }
+        }
+      },
+      "SettleInvoiceResult": {
+        "type": "object"
+      },
+      "SettlementData": {
+        "description": "Data needed to authorize and execute a settlement transaction.",
+        "type": "object",
+        "required": [
+          "local_amount",
+          "remote_amount",
+          "tlcs"
+        ],
+        "properties": {
+          "local_amount": {
+            "description": "The total amount of CKB/UDT being settled for the local party",
+            "type": "integer",
+            "format": "uint128",
+            "minimum": 0.0
+          },
+          "remote_amount": {
+            "description": "The total amount of CKB/UDT being settled for the remote party",
+            "type": "integer",
+            "format": "uint128",
+            "minimum": 0.0
+          },
+          "tlcs": {
+            "description": "The list of pending Time-Locked Contracts (TLCs) included in this settlement",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SettlementTlc"
+            }
+          }
+        }
+      },
+      "SettlementTlc": {
+        "description": "Data needed to authorize and execute a Time-Locked Contract (TLC) settlement transaction.",
+        "type": "object",
+        "required": [
+          "expiry",
+          "hash_algorithm",
+          "local_key",
+          "payment_amount",
+          "payment_hash",
+          "remote_key",
+          "tlc_id"
+        ],
+        "properties": {
+          "expiry": {
+            "description": "The expiry time for the TLC in milliseconds",
+            "type": "integer",
+            "format": "uint64",
+            "minimum": 0.0
+          },
+          "hash_algorithm": {
+            "description": "The hash algorithm used for the TLC",
+            "$ref": "#/components/schemas/HashAlgorithm"
+          },
+          "local_key": {
+            "description": "The local party's private key used to sign the TLC",
+            "$ref": "#/components/schemas/Privkey"
+          },
+          "payment_amount": {
+            "description": "The amount of CKB/UDT involved in the TLC",
+            "type": "integer",
+            "format": "uint128",
+            "minimum": 0.0
+          },
+          "payment_hash": {
+            "description": "The hash of the payment preimage",
+            "$ref": "#/components/schemas/Hash256"
+          },
+          "remote_key": {
+            "description": "The remote party's public key used to verify the TLC",
+            "$ref": "#/components/schemas/Pubkey"
+          },
+          "tlc_id": {
+            "description": "The ID of the TLC (either offered or received)",
+            "$ref": "#/components/schemas/TLCId"
+          }
+        }
+      },
+      "ShutdownChannelParams": {
+        "type": "object",
+        "required": [
+          "channel_id"
+        ],
+        "properties": {
+          "channel_id": {
+            "description": "The channel ID of the channel to shut down",
+            "$ref": "#/components/schemas/Hash256"
+          },
+          "close_script": {
+            "description": "The script used to receive the channel balance, only support secp256k1_blake160_sighash_all script for now default is `default_funding_lock_script` in `CkbConfig`",
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Script"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "fee_rate": {
+            "description": "The fee rate for the closing transaction, the fee will be deducted from the closing initiator's channel balance default is 1000 shannons/KW",
+            "default": null,
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "force": {
+            "description": "Whether to force the channel to close, when set to false, `close_script` and `fee_rate` should be set, default is false. When set to true, `close_script` and `fee_rate` will be ignored and will use the default value when opening the channel.",
+            "type": [
+              "boolean",
+              "null"
+            ]
+          }
+        }
+      },
+      "SubmitCommitmentTransactionParams": {
+        "type": "object",
+        "required": [
+          "channel_id",
+          "commitment_number"
+        ],
+        "properties": {
+          "channel_id": {
+            "description": "Channel ID",
+            "$ref": "#/components/schemas/Hash256"
+          },
+          "commitment_number": {
+            "description": "Commitment number",
+            "type": "string",
+            "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+          }
+        }
+      },
+      "SubmitCommitmentTransactionResult": {
+        "type": "object",
+        "required": [
+          "tx_hash"
+        ],
+        "properties": {
+          "tx_hash": {
+            "description": "Submitted commitment transaction hash",
+            "$ref": "#/components/schemas/Hash256"
+          }
+        }
+      },
+      "TLCId": {
+        "description": "The id of a tlc, it can be either offered or received.",
+        "oneOf": [
+          {
+            "description": "Offered tlc id",
+            "type": "object",
+            "required": [
+              "Offered"
+            ],
+            "properties": {
+              "Offered": {
+                "type": "integer",
+                "format": "uint64",
+                "minimum": 0.0
+              }
+            },
+            "additionalProperties": false
+          },
+          {
+            "description": "Received tlc id",
+            "type": "object",
+            "required": [
+              "Received"
+            ],
+            "properties": {
+              "Received": {
+                "type": "integer",
+                "format": "uint64",
+                "minimum": 0.0
+              }
+            },
+            "additionalProperties": false
+          }
+        ]
+      },
+      "TlcStatus": {
+        "description": "The status of a tlc",
+        "oneOf": [
+          {
+            "description": "Outbound tlc",
+            "type": "object",
+            "required": [
+              "Outbound"
+            ],
+            "properties": {
+              "Outbound": {
+                "$ref": "#/components/schemas/OutboundTlcStatus"
+              }
+            },
+            "additionalProperties": false
+          },
+          {
+            "description": "Inbound tlc",
+            "type": "object",
+            "required": [
+              "Inbound"
+            ],
+            "properties": {
+              "Inbound": {
+                "$ref": "#/components/schemas/InboundTlcStatus"
+              }
+            },
+            "additionalProperties": false
+          }
+        ]
+      },
+      "UdtArgInfo": {
+        "description": "The UDT argument info which is used to identify the UDT configuration",
+        "type": "object",
+        "required": [
+          "cell_deps",
+          "name",
+          "script"
+        ],
+        "properties": {
+          "auto_accept_amount": {
+            "description": "The minimum amount of the UDT that can be automatically accepted.",
+            "default": null,
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "cell_deps": {
+            "description": "The cell deps of the UDT.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UdtDep"
+            }
+          },
+          "name": {
+            "description": "The name of the UDT.",
+            "type": "string"
+          },
+          "script": {
+            "description": "The script of the UDT.",
+            "$ref": "#/components/schemas/UdtScript"
+          }
+        }
+      },
+      "UdtCellDep": {
+        "description": "The UDT cell dep which is used to identify the UDT configuration for a Fiber Node",
+        "type": "object",
+        "required": [
+          "dep_type",
+          "out_point"
+        ],
+        "properties": {
+          "dep_type": {
+            "description": "The type of the cell dep.",
+            "$ref": "#/components/schemas/DepType"
+          },
+          "out_point": {
+            "description": "The out point of the cell dep.",
+            "$ref": "#/components/schemas/OutPoint"
+          }
+        }
+      },
+      "UdtCfgInfos": {
+        "description": "A list of UDT configuration infos.",
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/UdtArgInfo"
+        }
+      },
+      "UdtDep": {
+        "description": "Udt script on-chain dependencies.",
+        "type": "object",
+        "properties": {
+          "cell_dep": {
+            "description": "cell dep described by out_point.",
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UdtCellDep"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "type_id": {
+            "description": "cell dep described by type ID.",
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Script"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        }
+      },
+      "UdtScript": {
+        "description": "The UDT script which is used to identify the UDT configuration for a Fiber Node",
+        "type": "object",
+        "required": [
+          "args",
+          "code_hash",
+          "hash_type"
+        ],
+        "properties": {
+          "args": {
+            "description": "The arguments of the script.",
+            "type": "string"
+          },
+          "code_hash": {
+            "description": "The code hash of the script.",
+            "type": "string",
+            "pattern": "^0x([0-9a-fA-F]{2})*$"
+          },
+          "hash_type": {
+            "description": "The hash type of the script.",
+            "$ref": "#/components/schemas/ScriptHashType"
+          }
+        }
+      },
+      "Uint32": {
+        "type": "integer",
+        "format": "uint32",
+        "minimum": 0.0
+      },
+      "UpdateChannelParams": {
+        "type": "object",
+        "required": [
+          "channel_id"
+        ],
+        "properties": {
+          "channel_id": {
+            "description": "The channel ID of the channel to update",
+            "$ref": "#/components/schemas/Hash256"
+          },
+          "enabled": {
+            "description": "Whether the channel is enabled",
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "tlc_expiry_delta": {
+            "description": "The expiry delta for the TLC locktime",
+            "default": null,
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tlc_fee_proportional_millionths": {
+            "description": "The fee proportional millionths for a TLC",
+            "default": null,
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tlc_minimum_value": {
+            "description": "The minimum value for a TLC",
+            "default": null,
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        }
+      },
+      "UpdateLocalSettlementParams": {
+        "type": "object",
+        "required": [
+          "channel_id",
+          "settlement_data"
+        ],
+        "properties": {
+          "channel_id": {
+            "description": "Channel ID",
+            "$ref": "#/components/schemas/Hash256"
+          },
+          "settlement_data": {
+            "description": "Settlement data",
+            "$ref": "#/components/schemas/SettlementData"
+          }
+        }
+      },
+      "UpdatePendingRemoteSettlementParams": {
+        "type": "object",
+        "required": [
+          "channel_id",
+          "settlement_data"
+        ],
+        "properties": {
+          "channel_id": {
+            "description": "Channel ID",
+            "$ref": "#/components/schemas/Hash256"
+          },
+          "settlement_data": {
+            "description": "Settlement data",
+            "$ref": "#/components/schemas/SettlementData"
+          }
+        }
+      },
+      "UpdateRevocationParams": {
+        "type": "object",
+        "required": [
+          "channel_id",
+          "revocation_data",
+          "settlement_data"
+        ],
+        "properties": {
+          "channel_id": {
+            "description": "Channel ID",
+            "$ref": "#/components/schemas/Hash256"
+          },
+          "revocation_data": {
+            "description": "Revocation data",
+            "$ref": "#/components/schemas/RevocationData"
+          },
+          "settlement_data": {
+            "description": "Settlement data",
+            "$ref": "#/components/schemas/SettlementData"
+          }
+        }
+      }
+    }
+  }
+}

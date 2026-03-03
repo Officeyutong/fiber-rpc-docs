@@ -14,7 +14,7 @@ const schemaModalClose = document.getElementById("schema-modal-close");
 const schemaModalBackdrop = schemaModal?.querySelector("[data-close-schema]");
 
 const DEFAULT_ENDPOINT = "http://localhost:8114";
-const SPEC_URL = document.body.dataset.spec || "../json/ckb_rpc.json";
+const SPEC_URL = document.body.dataset.spec;
 const SUBSCRIPTION_TOPICS = [
   "new_tip_header",
   "new_tip_block",
@@ -23,13 +23,13 @@ const SUBSCRIPTION_TOPICS = [
   "rejected_transaction",
 ];
 const HTTP_PRESETS = [
-  { label: "Mainnet", value: "https://mainnet.ckb.dev" },
-  { label: "Testnet", value: "https://testnet.ckb.dev" },
+  { label: "Mainnet", value: "" },
+  { label: "Testnet", value: "" },
   { label: "Devnet", value: "http://localhost:8114" },
 ];
 const WS_PRESETS = [
-  { label: "Mainnet", value: "wss://mainnet-ws.ckbapp.dev" },
-  { label: "Testnet", value: "wss://testnet-ws.ckbapp.dev" },
+  { label: "Mainnet", value: "" },
+  { label: "Testnet", value: "" },
 ];
 const DEFAULT_METHOD = "get_block_by_number";
 
@@ -52,7 +52,7 @@ const state = {
 function saveSetting(key, value) {
   try {
     localStorage.setItem(key, value);
-  } catch (_) {}
+  } catch (_) { }
 }
 
 function loadSetting(key) {
@@ -190,24 +190,24 @@ function linkifySchemas(root) {
 
 const md = window.markdownit
   ? window.markdownit({
-      html: false,
-      linkify: true,
-      typographer: true,
-      breaks: true,
-      highlight(code, lang) {
-        if (window.hljs && lang && window.hljs.getLanguage(lang)) {
-          try {
-            return window.hljs.highlight(code, { language: lang }).value;
-          } catch (_) {}
-        }
-        if (window.hljs) {
-          try {
-            return window.hljs.highlightAuto(code).value;
-          } catch (_) {}
-        }
-        return "";
-      },
-    })
+    html: false,
+    linkify: true,
+    typographer: true,
+    breaks: true,
+    highlight(code, lang) {
+      if (window.hljs && lang && window.hljs.getLanguage(lang)) {
+        try {
+          return window.hljs.highlight(code, { language: lang }).value;
+        } catch (_) { }
+      }
+      if (window.hljs) {
+        try {
+          return window.hljs.highlightAuto(code).value;
+        } catch (_) { }
+      }
+      return "";
+    },
+  })
   : null;
 
 function clear(node) {
@@ -424,7 +424,7 @@ function selectSubscriptionTopic(topic) {
   state.selectedTag = "Subscription";
   applyEndpointMode("ws");
   renderTags();
-  renderDetail(state.subscriptionMethod || { name: "subscribe", tags: [{ name: "Subscription" }] }, topic);
+  renderDetail(state.subscriptionMethod || { name: "subscribe", tags: [{ name: "Subscription" }], result: {} }, topic);
   renderTryPanel();
   const hash = `topic=${encodeURIComponent(topic)}`;
   history.replaceState(null, "", `#${hash}`);
@@ -973,7 +973,7 @@ function buildSubscriptionTrySection(topic) {
         if ((trimmed.startsWith("{") && trimmed.endsWith("}")) || (trimmed.startsWith("[") && trimmed.endsWith("]"))) {
           try {
             params.result = JSON.parse(trimmed);
-          } catch (_) {}
+          } catch (_) { }
         }
       }
       next.params = params;
@@ -1017,17 +1017,17 @@ function buildSubscriptionTrySection(topic) {
     setWsStatus("Connecting...", false);
     ws = new WebSocket(url);
     return new Promise((resolve, reject) => {
-    ws.onopen = () => {
-      updateWsStatusLabel(true);
-      resolve();
-    };
-    ws.onclose = () => {
-      updateWsStatusLabel(false);
-      updateSubscriptionButtons();
-    };
-    ws.onerror = () => {
-      setWsStatus("Error", false);
-      reject(new Error("WebSocket error"));
+      ws.onopen = () => {
+        updateWsStatusLabel(true);
+        resolve();
+      };
+      ws.onclose = () => {
+        updateWsStatusLabel(false);
+        updateSubscriptionButtons();
+      };
+      ws.onerror = () => {
+        setWsStatus("Error", false);
+        reject(new Error("WebSocket error"));
       };
       ws.onmessage = (event) => {
         const raw = event.data;
@@ -1069,7 +1069,7 @@ function buildSubscriptionTrySection(topic) {
               }
             }
           }
-        } catch (_) {}
+        } catch (_) { }
       };
     });
   }
@@ -1308,7 +1308,7 @@ function init() {
       const msg = el(
         "p",
         "",
-        `${err.message}. If you opened this via file://, run a local server (e.g. "python -m http.server" in docs) and visit http://localhost:8000/ckb_rpc_webui/.`
+        `${err.message}. If you opened this via file://, run a local server (e.g. "python -m http.server" in docs) and visit http://localhost:8000`
       );
       error.append(msg);
       detailContainer.append(error);
