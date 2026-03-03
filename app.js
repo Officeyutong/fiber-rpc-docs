@@ -5,7 +5,6 @@ const tryoutPanel = document.getElementById("tryout-panel");
 const panelResizer = document.getElementById("panel-resizer");
 const detailContainer = document.getElementById("method-detail");
 const clearTagBtn = document.getElementById("clear-tag");
-const endpointPreset = document.getElementById("endpoint-preset");
 const endpointLabel = document.getElementById("endpoint-label");
 const schemaModal = document.getElementById("schema-modal");
 const schemaModalTitle = document.getElementById("schema-modal-title");
@@ -22,16 +21,7 @@ const SUBSCRIPTION_TOPICS = [
   "proposed_transaction",
   "rejected_transaction",
 ];
-const HTTP_PRESETS = [
-  { label: "Mainnet", value: "" },
-  { label: "Testnet", value: "" },
-  { label: "Devnet", value: "http://localhost:8114" },
-];
-const WS_PRESETS = [
-  { label: "Mainnet", value: "" },
-  { label: "Testnet", value: "" },
-];
-const DEFAULT_METHOD = "get_block_by_number";
+let DEFAULT_METHOD = null;
 
 const state = {
   spec: null,
@@ -63,47 +53,21 @@ function loadSetting(key) {
   }
 }
 
-function buildPresetOptions(mode) {
-  const presets = mode === "ws" ? WS_PRESETS : HTTP_PRESETS;
-  endpointPreset.innerHTML = "";
-  presets.forEach((preset) => {
-    const option = el("option", "", preset.label);
-    option.value = preset.value;
-    endpointPreset.append(option);
-  });
-  const custom = el("option", "", "Custom");
-  custom.value = "";
-  endpointPreset.append(custom);
-  return presets;
-}
-
 function applyEndpointMode(mode) {
   state.endpointMode = mode;
-  const presets = buildPresetOptions(mode);
   const label = mode === "ws" ? "WebSocket Endpoint" : "HTTP Endpoint";
   if (endpointLabel) endpointLabel.textContent = label;
   endpointInput.placeholder = mode === "ws" ? "wss://..." : "https://...";
   const saved = mode === "ws"
     ? loadSetting("rpcWsEndpoint")
     : loadSetting("rpcEndpoint");
-  const fallback = presets[0]?.value || "";
-  const value = saved || fallback;
+  const value = saved || DEFAULT_ENDPOINT;
   endpointInput.value = value;
-  endpointPreset.value = presets.some((p) => p.value === value) ? value : "";
-}
-
-function currentPresets() {
-  return state.endpointMode === "ws" ? WS_PRESETS : HTTP_PRESETS;
 }
 
 function saveEndpointValue(value) {
   const key = state.endpointMode === "ws" ? "rpcWsEndpoint" : "rpcEndpoint";
   saveSetting(key, value);
-}
-
-function syncPresetSelection(value) {
-  const presets = currentPresets();
-  endpointPreset.value = presets.some((p) => p.value === value) ? value : "";
 }
 
 function el(tag, className, text) {
@@ -824,7 +788,6 @@ function buildTrySection(method) {
   });
 
   endpointInput.addEventListener("input", updateCurlPreview);
-  endpointPreset?.addEventListener("change", updateCurlPreview);
   headersInput.addEventListener("input", updateCurlPreview);
   idInput.addEventListener("input", updateCurlPreview);
   rawParams.addEventListener("input", updateCurlPreview);
@@ -1173,28 +1136,10 @@ function buildDefaultParams(params) {
 function init() {
   applyEndpointMode("http");
 
-  endpointInput.addEventListener("input", () => {
-    const value = endpointInput.value.trim();
-    if (!value) {
-      endpointPreset.value = "";
-      return;
-    }
-    syncPresetSelection(value);
-  });
-
   endpointInput.addEventListener("change", () => {
     const value = endpointInput.value.trim();
     if (!value) return;
     saveEndpointValue(value);
-    syncPresetSelection(value);
-  });
-
-  endpointPreset?.addEventListener("change", () => {
-    const value = endpointPreset.value;
-    if (!value) return;
-    endpointInput.value = value;
-    saveEndpointValue(value);
-    syncPresetSelection(value);
   });
 
   const savedDetail = loadSetting("detailWidth");
@@ -1276,9 +1221,10 @@ function init() {
       state.tags = buildTags(spec);
       state.methods = indexMethods(spec.methods || []);
       state.subscriptionMethod = state.methods.find((m) => m.name === "subscribe") || null;
+      DEFAULT_METHOD = state.methods.length ? state.methods[0].name : null;
       state.expandedTags = new Set(state.tags.map((tag) => tag.name));
       renderTags();
-      if (!location.hash) {
+      if (!location.hash && DEFAULT_METHOD) {
         history.replaceState(null, "", `#method=${encodeURIComponent(DEFAULT_METHOD)}`);
       }
       const hash = decodeURIComponent(location.hash.replace("#", ""));

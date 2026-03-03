@@ -106,28 +106,6 @@ body {
   color: var(--muted);
 }
 
-.endpoint-row {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
-
-.preset-select {
-  width: 110px;
-  border: 1px solid var(--line);
-  background: rgba(11, 15, 20, 0.85);
-  color: var(--muted);
-  padding: 10px 12px;
-  border-radius: 12px;
-  font-size: 13px;
-  cursor: pointer;
-}
-
-.preset-select:hover,
-.preset-select:focus {
-  border-color: var(--accent);
-  color: var(--ink);
-}
 
 .field input {
   width: 320px;
