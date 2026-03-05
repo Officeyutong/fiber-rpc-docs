@@ -514,6 +514,19 @@ function renderSchemaTree(schema, keyLabel, required, seenRefs) {
     body.append(el("div", "notice", `Enum: ${currentSchema.enum.join(", ")}`));
   }
 
+  const constraints = [];
+  if (currentSchema.format) constraints.push(`format: ${currentSchema.format}`);
+  if (currentSchema.pattern) constraints.push(`pattern: ${currentSchema.pattern}`);
+  if (currentSchema.minLength !== undefined) constraints.push(`minLength: ${currentSchema.minLength}`);
+  if (currentSchema.maxLength !== undefined) constraints.push(`maxLength: ${currentSchema.maxLength}`);
+  if (currentSchema.minimum !== undefined) constraints.push(`minimum: ${currentSchema.minimum}`);
+  if (currentSchema.maximum !== undefined) constraints.push(`maximum: ${currentSchema.maximum}`);
+  if (currentSchema.exclusiveMinimum !== undefined) constraints.push(`exclusiveMinimum: ${currentSchema.exclusiveMinimum}`);
+  if (currentSchema.exclusiveMaximum !== undefined) constraints.push(`exclusiveMaximum: ${currentSchema.exclusiveMaximum}`);
+  if (constraints.length) {
+    body.append(el("div", "notice", constraints.join(" | ")));
+  }
+
   if (currentSchema.properties) {
     const requiredList = new Set(currentSchema.required || []);
     for (const [key, value] of Object.entries(currentSchema.properties)) {
