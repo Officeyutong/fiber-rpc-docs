@@ -635,35 +635,6 @@
       ]
     },
     {
-      "name": "send_payment",
-      "summary": "Sends a payment to a peer.",
-      "description": "Sends a payment to a peer.",
-      "params": [
-        {
-          "name": "params",
-          "summary": "",
-          "description": "",
-          "required": true,
-          "schema": {
-            "$ref": "#/components/schemas/SendPaymentCommandParams"
-          }
-        }
-      ],
-      "result": {
-        "name": "send_payment_result",
-        "summary": "Sends a payment to a peer.",
-        "description": "Sends a payment to a peer.\n",
-        "schema": {
-          "$ref": "#/components/schemas/GetPaymentCommandResult"
-        }
-      },
-      "tags": [
-        {
-          "name": "payment"
-        }
-      ]
-    },
-    {
       "name": "send_payment_with_router",
       "summary": "Sends a payment to a peer with specified router.",
       "description": "Sends a payment to a peer with specified router.\nThis method differs from SendPayment in that it allows users to specify a full route manually.\n\nA typical use case is **channel rebalancing**: you can construct a circular route\n(your node -> intermediate nodes -> your node) to shift liquidity between your channels.\n\nTo rebalance, follow these steps:\n\n1. Call `build_router` with `hops_info` defining the circular route you want,\n   e.g. your_node -> peer_A -> peer_B -> your_node.\n2. Call `send_payment_with_router` with the returned `router_hops` and `keysend: true`.\n\nOnly routing fees are deducted; your total balance across channels remains the same.",
@@ -684,6 +655,64 @@
         "description": "Sends a payment to a peer with specified router.\nThis method differs from SendPayment in that it allows users to specify a full route manually.\n\nA typical use case is **channel rebalancing**: you can construct a circular route\n(your node -> intermediate nodes -> your node) to shift liquidity between your channels.\n\nTo rebalance, follow these steps:\n\n1. Call `build_router` with `hops_info` defining the circular route you want,\n   e.g. your_node -> peer_A -> peer_B -> your_node.\n2. Call `send_payment_with_router` with the returned `router_hops` and `keysend: true`.\n\nOnly routing fees are deducted; your total balance across channels remains the same.\n",
         "schema": {
           "$ref": "#/components/schemas/GetPaymentCommandResult"
+        }
+      },
+      "tags": [
+        {
+          "name": "payment"
+        }
+      ]
+    },
+    {
+      "name": "get_payment",
+      "summary": "Retrieves a payment.",
+      "description": "Retrieves a payment.",
+      "params": [
+        {
+          "name": "params",
+          "summary": "",
+          "description": "",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/GetPaymentCommandParams"
+          }
+        }
+      ],
+      "result": {
+        "name": "get_payment_result",
+        "summary": "Retrieves a payment.",
+        "description": "Retrieves a payment.\n",
+        "schema": {
+          "$ref": "#/components/schemas/GetPaymentCommandResult"
+        }
+      },
+      "tags": [
+        {
+          "name": "payment"
+        }
+      ]
+    },
+    {
+      "name": "list_payments",
+      "summary": "Lists all payments, optionally filtered by status.",
+      "description": "Lists all payments, optionally filtered by status.",
+      "params": [
+        {
+          "name": "params",
+          "summary": "",
+          "description": "",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/ListPaymentsParams"
+          }
+        }
+      ],
+      "result": {
+        "name": "list_payments_result",
+        "summary": "Lists all payments, optionally filtered by status.",
+        "description": "Lists all payments, optionally filtered by status.\n",
+        "schema": {
+          "$ref": "#/components/schemas/ListPaymentsResult"
         }
       },
       "tags": [
@@ -722,9 +751,9 @@
       ]
     },
     {
-      "name": "get_payment",
-      "summary": "Retrieves a payment.",
-      "description": "Retrieves a payment.",
+      "name": "send_payment",
+      "summary": "Sends a payment to a peer.",
+      "description": "Sends a payment to a peer.",
       "params": [
         {
           "name": "params",
@@ -732,14 +761,14 @@
           "description": "",
           "required": true,
           "schema": {
-            "$ref": "#/components/schemas/GetPaymentCommandParams"
+            "$ref": "#/components/schemas/SendPaymentCommandParams"
           }
         }
       ],
       "result": {
-        "name": "get_payment_result",
-        "summary": "Retrieves a payment.",
-        "description": "Retrieves a payment.\n",
+        "name": "send_payment_result",
+        "summary": "Sends a payment to a peer.",
+        "description": "Sends a payment to a peer.\n",
         "schema": {
           "$ref": "#/components/schemas/GetPaymentCommandResult"
         }
@@ -2135,6 +2164,7 @@
         ]
       },
       "CkbScript": {
+        "description": "A wrapper around `ckb_types::packed::Script` with hex serialization.",
         "type": "string",
         "pattern": "^0x([0-9a-fA-F]{2})*$"
       },
@@ -2290,7 +2320,7 @@
             ]
           },
           {
-            "description": "Type \"dep_group\".\n\nThe cell is a dep group which members are cells. These members are used as dep cells instead of the group itself.\n\nThe dep group stores the array of `OutPoint`s serialized via molecule in the cell data. Each `OutPoint` points to one cell member.",
+            "description": "Type \"dep_group\".\n\nThe cell is a dep group whose members are cells. These members are used as dep cells instead of the group itself.\n\nThe dep group stores the array of `OutPoint`s serialized via molecule in the cell data. Each `OutPoint` points to one cell member.",
             "type": "string",
             "enum": [
               "dep_group"
@@ -2358,6 +2388,7 @@
         }
       },
       "GetPaymentCommandResult": {
+        "description": "The result of a get_payment command, which includes the payment hash, status, timestamps, error message if failed, fee paid, and custom records.",
         "type": "object",
         "required": [
           "created_at",
@@ -2785,6 +2816,72 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Channel"
+            }
+          }
+        }
+      },
+      "ListPaymentsParams": {
+        "type": "object",
+        "properties": {
+          "after": {
+            "description": "The payment hash to start returning payments after (exclusive cursor for pagination).",
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Hash256"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "limit": {
+            "description": "The maximum number of payments to return. Default is 15.",
+            "default": null,
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^0x(0|[1-9a-fA-F][0-9a-fA-F]*)$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "status": {
+            "description": "Filter payments by status. If not set, all payments are returned.",
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PaymentStatus"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        }
+      },
+      "ListPaymentsResult": {
+        "type": "object",
+        "required": [
+          "payments"
+        ],
+        "properties": {
+          "last_cursor": {
+            "description": "The last cursor for pagination. Use this as `after` in the next request to get more results.",
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Hash256"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "payments": {
+            "description": "The list of payments.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetPaymentCommandResult"
             }
           }
         }
@@ -3589,7 +3686,137 @@
         "description": "Specifies how the script `code_hash` is used to match the script code and how to run the code.\n\nAllowed kinds: \"data\", \"type\", \"data1\" and \"data2\"\n\nRefer to the section [Code Locating](https://github.com/nervosnetwork/rfcs/blob/master/rfcs/0022-transaction-structure/0022-transaction-structure.md#code-locating) and [Upgradable Script](https://github.com/nervosnetwork/rfcs/blob/master/rfcs/0022-transaction-structure/0022-transaction-structure.md#upgradable-script) in the RFC *CKB Transaction Structure*.\n\nThe hash type is split into the high 7 bits and the low 1 bit, when the low 1 bit is 1, it indicates the type, when the low 1 bit is 0, it indicates the data, and then it relies on the high 7 bits to indicate that the data actually corresponds to the version.",
         "oneOf": [
           {
-            "description": "Type \"data\" matches script code via cell data hash, and run the script code in v0 CKB VM.",
+            "type": "string",
+            "enum": [
+              "data3",
+              "data4",
+              "data5",
+              "data6",
+              "data7",
+              "data8",
+              "data9",
+              "data10",
+              "data11",
+              "data12",
+              "data13",
+              "data14",
+              "data15",
+              "data16",
+              "data17",
+              "data18",
+              "data19",
+              "data20",
+              "data21",
+              "data22",
+              "data23",
+              "data24",
+              "data25",
+              "data26",
+              "data27",
+              "data28",
+              "data29",
+              "data30",
+              "data31",
+              "data32",
+              "data33",
+              "data34",
+              "data35",
+              "data36",
+              "data37",
+              "data38",
+              "data39",
+              "data40",
+              "data41",
+              "data42",
+              "data43",
+              "data44",
+              "data45",
+              "data46",
+              "data47",
+              "data48",
+              "data49",
+              "data50",
+              "data51",
+              "data52",
+              "data53",
+              "data54",
+              "data55",
+              "data56",
+              "data57",
+              "data58",
+              "data59",
+              "data60",
+              "data61",
+              "data62",
+              "data63",
+              "data64",
+              "data65",
+              "data66",
+              "data67",
+              "data68",
+              "data69",
+              "data70",
+              "data71",
+              "data72",
+              "data73",
+              "data74",
+              "data75",
+              "data76",
+              "data77",
+              "data78",
+              "data79",
+              "data80",
+              "data81",
+              "data82",
+              "data83",
+              "data84",
+              "data85",
+              "data86",
+              "data87",
+              "data88",
+              "data89",
+              "data90",
+              "data91",
+              "data92",
+              "data93",
+              "data94",
+              "data95",
+              "data96",
+              "data97",
+              "data98",
+              "data99",
+              "data100",
+              "data101",
+              "data102",
+              "data103",
+              "data104",
+              "data105",
+              "data106",
+              "data107",
+              "data108",
+              "data109",
+              "data110",
+              "data111",
+              "data112",
+              "data113",
+              "data114",
+              "data115",
+              "data116",
+              "data117",
+              "data118",
+              "data119",
+              "data120",
+              "data121",
+              "data122",
+              "data123",
+              "data124",
+              "data125",
+              "data126",
+              "data127"
+            ]
+          },
+          {
+            "description": "Type \"data\" matches script code via cell data hash, and runs the script code in v0 CKB VM",
             "type": "string",
             "enum": [
               "data"
@@ -3603,14 +3830,14 @@
             ]
           },
           {
-            "description": "Type \"data1\" matches script code via cell data hash, and run the script code in v1 CKB VM.",
+            "description": "Type \"data1\" matches script code via cell data hash, and runs the script code in v1 CKB VM",
             "type": "string",
             "enum": [
               "data1"
             ]
           },
           {
-            "description": "Type \"data2\" matches script code via cell data hash, and run the script code in v2 CKB VM.",
+            "description": "Type \"data2\" matches script code via cell data hash, and runs the script code in v2 CKB VM",
             "type": "string",
             "enum": [
               "data2"
