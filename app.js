@@ -1,4 +1,5 @@
 const endpointInput = document.getElementById("endpoint");
+const authTokenInput = document.getElementById("auth-token");
 const searchInput = document.getElementById("search");
 const tagsContainer = document.getElementById("tags");
 const tryoutPanel = document.getElementById("tryout-panel");
@@ -51,6 +52,12 @@ function loadSetting(key) {
   } catch (_) {
     return null;
   }
+}
+
+function getAuthHeaders() {
+  const token = authTokenInput.value.trim();
+  if (!token) return {};
+  return { Authorization: `Bearer ${token}` };
 }
 
 function applyEndpointMode(mode) {
@@ -721,7 +728,7 @@ function buildTrySection(method) {
       curlPre.textContent = err.message;
       return;
     }
-    const curl = buildCurlCommand(endpoint, { "Content-Type": "application/json", ...headers }, payload);
+    const curl = buildCurlCommand(endpoint, { "Content-Type": "application/json", ...getAuthHeaders(), ...headers }, payload);
     curlPre.textContent = curl;
   }
 
@@ -766,7 +773,7 @@ function buildTrySection(method) {
     try {
       const res = await fetch(endpoint, {
         method: "POST",
-        headers: { "Content-Type": "application/json", ...headers },
+        headers: { "Content-Type": "application/json", ...getAuthHeaders(), ...headers },
         body: JSON.stringify(payload),
       });
       const text = await res.text();
@@ -788,6 +795,7 @@ function buildTrySection(method) {
   });
 
   endpointInput.addEventListener("input", updateCurlPreview);
+  authTokenInput.addEventListener("input", updateCurlPreview);
   headersInput.addEventListener("input", updateCurlPreview);
   idInput.addEventListener("input", updateCurlPreview);
   rawParams.addEventListener("input", updateCurlPreview);
@@ -1135,6 +1143,13 @@ function buildDefaultParams(params) {
 
 function init() {
   applyEndpointMode("http");
+
+  const savedToken = loadSetting("rpcAuthToken");
+  if (savedToken) authTokenInput.value = savedToken;
+
+  authTokenInput.addEventListener("change", () => {
+    saveSetting("rpcAuthToken", authTokenInput.value.trim());
+  });
 
   endpointInput.addEventListener("change", () => {
     const value = endpointInput.value.trim();
