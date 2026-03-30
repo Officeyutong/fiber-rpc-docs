@@ -2,7 +2,7 @@
 
 ## Online preview
 
-https://https://fiber-rpc-docs.vercel.app/
+https://fiber-rpc-docs.vercel.app/
 
 ## Deploy locally
 
